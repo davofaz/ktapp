@@ -37,7 +37,7 @@ export default class PhoneListItemNew extends React.Component {
         return (
           <View style={{display:'flex', borderBottomWidth:1,borderBottomColor:'#fff'}}>
             <TouchableHighlight
-              style={{width:'100%', height:50}}
+              style={{width:'100%', height:60}}
               onPress={()=>{Linking.openURL(`tel:${number}`);}}
               underlayColor='rgba(250, 168, 127, 0.7)'>
               <View style={{flexDirection:'row'}}>
