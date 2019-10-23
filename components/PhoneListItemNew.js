@@ -45,7 +45,7 @@ export default class PhoneListItemNew extends React.Component {
                   <Text style={styles.phoneTitleText}>{name}</Text>
                   <Text style={styles.phoneNumText}>{number}</Text>
                 </View>
-                <View style={{marginLeft:20, width:'72%'}}>
+                <View style={{marginLeft:20, marginTop:8, width:'72%'}}>
                   <Ionicons
                     style={{display:'flex', width: '25%', color:'#fff', marginTop:5, marginLeft:20}}
                     size={32}
