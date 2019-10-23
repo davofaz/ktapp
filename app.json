@@ -1,0 +1,35 @@
+{
+  "expo": {
+    "name": "KT",
+    "slug": "kt",
+    "description": "Kensington Temple London City Church App",
+    "privacy": "public",
+    "sdkVersion": "34.0.0",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/images/kt-logo-2.png",
+    "splash": {
+      "image": "./assets/images/splash5.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "bundleIdentifier": "xyz.fazaa.kt",
+      "supportsTablet": true
+    },
+    "android": {
+      "package": "xyz.fazaa.kt"
+    }
+  }
+}
