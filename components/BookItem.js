@@ -38,30 +38,25 @@ export default class BookItem extends React.Component {
     const { title, post_meta_fields, id, jetpack_featured_media_url } = this.props.item;
     console.log(post_meta_fields)
 
-    //  if (isLoaded) {
-        return (
-            <View>
-            <TouchableHighlight
-              style={{height:100, marginBottom:10}}
-              onPress={() => WebBrowser.openBrowserAsync(post_meta_fields.flip_book_url[0])}
-              underlayColor='rgba(250, 168, 127, 0.7)'>
-              <View style={{display:'flex', flexDirection:'row'}}>
-                <Image
-                  style={{width:150, height:100}}
-                  source={{uri: jetpack_featured_media_url}}
-                  />
-                  <View style={{backgroundColor: 'rgba(196, 196, 196, 0.5)', height:100, width:'100%'}}>
-                  <Text style={styles.rtLinkText}>{title.rendered}</Text>
-                  </View>
-              </View>
-            </TouchableHighlight>
-
+      return (
+        <View>
+          <TouchableHighlight
+            style={styles.itemContainer}
+            onPress={() => WebBrowser.openBrowserAsync(post_meta_fields.flip_book_url[0])}
+            underlayColor='rgba(250, 168, 127, 1)'>
+            <View style={{display:'flex', flexDirection:'row'}}>
+              <Image
+                style={{width:150, height:100}}
+                source={{uri: jetpack_featured_media_url}}
+                />
+                <View style={{/*backgroundColor: 'rgba(196, 196, 196, 1)',*/ height:100, width:'100%'}}>
+                <Text style={styles.rtLinkText}>{title.rendered}</Text>
+                </View>
             </View>
+          </TouchableHighlight>
+        </View>
           )
-    /*  }
-      return null
-
-  */  };
+      };
   };
 
 const styles = StyleSheet.create({
@@ -78,42 +73,21 @@ const styles = StyleSheet.create({
       borderRadius: 3,
       paddingHorizontal: 4,
     },
-    flexItem: {
-      padding: 10,
-      width: 130,
-      height: 130,
-      borderRadius: 10,
-      borderWidth:1,
-      borderColor: '#fff',
-      opacity: 80,
-      flexDirection: 'row',
-      backgroundColor: 'rgba(196, 196, 196, 0.5)',
-      marginTop: 20,
-      marginRight: 10,
-      marginLeft: 10,
-      /*textAlign: 'center',*/
-      justifyContent:'center',
-      alignContent: 'center',
-      },
-    flexItemWide: {
-      //padding: 10,
-      width: '100%',
-      //borderRadius: 10,
-      //borderWidth:1,
-      //borderColor: '#fff',
-      opacity: 80,
-      //flexDirection: 'column',
-      backgroundColor: 'rgba(196, 196, 196, 0.5)',
-      marginTop: 20,
-      //justifyContent:'center',
-      //alignContent: 'center',
-      },
-
+    itemContainer: {
+        height:100,
+        marginBottom:10,
+        backgroundColor: 'rgba(137, 167, 165, 1)',
+        shadowColor: 'rgba(0,0,0, 1)', // IOS
+        shadowOffset: { height: 2, width: 0 }, // IOS
+        shadowOpacity: 1, // IOS
+        shadowRadius: 1, //IOS
+        elevation: 6, // Android
+    },
     rtLinkText: {
       color: '#fff',
       fontSize: 14,
       marginLeft:20,
-      marginTop:50,
+      marginTop:30,
       textTransform: 'uppercase',
       fontWeight: 'bold',
       width:130,
