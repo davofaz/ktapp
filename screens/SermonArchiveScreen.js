@@ -1,5 +1,5 @@
 import * as WebBrowser from 'expo-web-browser';
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   Image,
   Button,
@@ -17,43 +17,32 @@ import {
 } from 'react-native';
 import Touchable from 'react-native-platform-touchable';
 import { Ionicons } from '@expo/vector-icons';
+import { connect } from 'react-redux';
+
+import { getSermons } from '../actions/sermonArchives';
 import { MonoText } from '../components/StyledText';
 import  VideoItem  from '../components/VideoItem';
 
 
+function SermonArchiveScreen ({
+  getSermonsAction,
+  navigation,
+  booksRT,
+  loaded,
+}) {
 
-export default class SermonArchiveScreen extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-       isLoaded: false,
-       booksRT: [],
-     };
-  }
+  const { goBack } = navigation;
 
-  componentDidMount() {
-    return fetch ('https://www.kt.org/wp-json/wp/v2/posts?categories=8')
-      .then(response => response.json())
-      .then(responseJson => {
-        this.setState(
-          {
-            booksRT: responseJson,
-            isLoaded: true
-          },
-          function() {}
-        );
-      })
-      .catch((err) => {
-        console.error(err)
-      });
-      //console.log(responseJson);
+  useEffect(
+    () => {
+      if (!loaded) {
+        getSermonsAction();
+      }
+    },
+    [loaded],
+  );
 
-}
-  render() {
-    const { booksRT, isLoaded } = this.state;
-    //console.log(this.state.booksRT);
-    const { goBack } = this.props.navigation;
-    return (
+  return (
     <View style={styles.container}>
       <ImageBackground source={require('../assets/images/background-image.jpg')} style={{width: '100%', height: '100%', resizeMode: 'cover'}}>
         <ScrollView
@@ -72,61 +61,60 @@ export default class SermonArchiveScreen extends React.Component {
             </TouchableOpacity>
             <Text style={styles.pageTitleText}>Latest Sermons</Text>
           </View>
-        { isLoaded ? (
-          <View style={{flex: 1, paddingTop: 5, alignItems: 'center'}}>
+          { 
+            booksRT !== undefined 
+              ? (
+              <View style={{flex: 1, paddingTop: 5, alignItems: 'center'}}>
 
-            <FlatList
-              style={{width:'100%'}}
-              data={this.state.booksRT}
-              renderItem={({ item }) => {
-                return (
-                  <VideoItem
-                    item = {item}
-                  />
-                )
-              }}
-              keyExtractor={(item, index) => index.toString()}
-            />
-            <View style={styles.container, {alignItems: 'center', flexDirection:'row', marginBottom:30}}>
-            <TouchableHighlight
-              style={styles.buttonSquare}
-              onPress={handlePressSeeMoreVideos}
-              underlayColor='rgba(250, 168, 127, 1)'>
-                  <Text style={styles.homeLinkText}>See more{"\n"}on our website</Text>
-            </TouchableHighlight>
-            <TouchableHighlight
-                style={styles.buttonSquare}
-                onPress={() => goBack()} title="Go back"
-                underlayColor='rgba(250, 168, 127, 1)'>
-                  <Text style={styles.homeLinkText}>Go{"\n"}Back{"\n"}
-                    <Ionicons
-                      style={{display:'flex'}}
-                      size={32}
-                      name={Platform.OS === 'ios'
-                      ? 'ios-arrow-back' : 'md-arrow-back'}/>
-                  </Text>
-              </TouchableHighlight>
-            </View>
-          </View>
-        ) : (
-        <View style={{ flex: 1, padding: 20 }}>
-          <ActivityIndicator size="large" color="#ffffff"/>
-        </View>
-      )}
-
-  </ScrollView>
-  </ImageBackground>
-  </View>
-);
-}
+                <FlatList
+                  style={{width:'100%'}}
+                  data={booksRT}
+                  renderItem={({ item }) => {
+                    return (
+                      <VideoItem
+                        item = {item}
+                      />
+                    )
+                  }}
+                  keyExtractor={(item, index) => index.toString()}
+                />
+                <View style={styles.container, {alignItems: 'center', flexDirection:'row', marginBottom:30}}>
+                <TouchableHighlight
+                  style={styles.buttonSquare}
+                  onPress={handlePressSeeMoreVideos}
+                  underlayColor='rgba(250, 168, 127, 1)'>
+                      <Text style={styles.homeLinkText}>See more{"\n"}on our website</Text>
+                </TouchableHighlight>
+                <TouchableHighlight
+                    style={styles.buttonSquare}
+                    onPress={() => goBack()} title="Go back"
+                    underlayColor='rgba(250, 168, 127, 1)'>
+                      <Text style={styles.homeLinkText}>Go{"\n"}Back{"\n"}
+                        <Ionicons
+                          style={{display:'flex'}}
+                          size={32}
+                          name={Platform.OS === 'ios'
+                          ? 'ios-arrow-back' : 'md-arrow-back'}/>
+                      </Text>
+                  </TouchableHighlight>
+                </View>
+              </View>
+              ) 
+            : (
+              <View style={{ flex: 1, padding: 20 }}>
+                <ActivityIndicator size="large" color="#ffffff"/>
+              </View>
+            )
+          }
+    </ScrollView>
+    </ImageBackground>
+    </View>
+  );
 }
 
 SermonArchiveScreen.navigationOptions = {
   header: null,
 };
-
-
-
 
 function handleLogoPress() {
   WebBrowser.openBrowserAsync(
@@ -266,3 +254,13 @@ const styles = StyleSheet.create({
     marginTop: 1,
   },
 });
+
+export default connect(
+  (state, ownProps) => ({
+    loaded: state.sermon.loaded,
+    booksRT: state.sermon.data,
+  }),
+  dispacth => ({
+    getSermonsAction: () => dispacth(getSermons())
+  }),
+)(SermonArchiveScreen)
