@@ -22,38 +22,41 @@ const store = createStore(
 export default function App(props) {
   const [isLoadingComplete, setLoadingComplete] = useState(false);
 
-  if (!isLoadingComplete && !props.skipLoadingScreen) {
-    return (
-      <AppLoading
-        startAsync={
-          () =>  Promise.all([
-            Asset.loadAsync([
-              require('./assets/images/kt-logo.png'),
-              require('./assets/images/kt-logo.png'),
-            ]),
-            Font.loadAsync({
-              // This is the font that we are using for our tab bar
-              ...Ionicons.font,
-              // We include SpaceMono because we use it in HomeScreen.js. Feel free to
-              // remove this if you are not using it in your app
-              'space-mono': require('./assets/fonts/SpaceMono-Regular.ttf'),
-            }),
-          ])
-        }
-        onError={() => console.warn(error)}
-        onFinish={() => setLoadingComplete(true)}
-      />
-    );
-  } else {
-    return (
-      <Provider store={store}>
-        <View style={styles.container}>
-          {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-          <AppNavigator />
-        </View>
-      </Provider>
-    );
-  }
+  return (
+    <Provider store={store}>
+      { 
+        !!(!isLoadingComplete && !props.skipLoadingScreen) && (
+          <AppLoading
+            startAsync={
+              () =>  Promise.all([
+                Asset.loadAsync([
+                  require('./assets/images/kt-logo.png'),
+                  require('./assets/images/kt-logo.png'),
+                ]),
+                Font.loadAsync({
+                  // This is the font that we are using for our tab bar
+                  ...Ionicons.font,
+                  // We include SpaceMono because we use it in HomeScreen.js. Feel free to
+                  // remove this if you are not using it in your app
+                  'space-mono': require('./assets/fonts/SpaceMono-Regular.ttf'),
+                }),
+              ])
+            }
+            onError={() => console.warn(error)}
+            onFinish={() => setLoadingComplete(true)}
+          />
+        )
+      }
+      {
+        isLoadingComplete && (
+          <View style={styles.container}>
+            {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
+            <AppNavigator />
+          </View>
+        )
+      }
+    </Provider>
+  );
 }
 
 const styles = StyleSheet.create({
