@@ -34,6 +34,7 @@ export default function App(props) {
                 ]),
                 Font.loadAsync({
                   'space-mono': require('./assets/fonts/SpaceMono-Regular.ttf'),
+                  Ionicons: require("@expo/vector-icons/fonts/Ionicons.ttf")
                 }),
               ])
             }
