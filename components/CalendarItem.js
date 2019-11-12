@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
         elevation: 6, // Android
     },
     textContainer: {
-      height:100, 
+      height:100,
       width:'100%',
     },
     eventTitleText: {
@@ -100,8 +100,11 @@ const styles = StyleSheet.create({
       fontSize: 14,
       marginLeft:10,
       marginTop:5,
+      width:220,
       textTransform: 'uppercase',
       fontWeight: 'bold',
+      overflow: 'hidden',
+      textOverflow: 'ellipsis',
       maxWidth:220,
     },
     eventDateText: {
