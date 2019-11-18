@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
       textTransform: 'uppercase',
       fontWeight: 'bold',
       overflow: 'hidden',
-      textOverflow: 'ellipsis',
+      //textOverflow: 'ellipsis',
       maxWidth:220,
     },
     eventDateText: {
