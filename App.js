@@ -3,6 +3,7 @@ import { Asset } from 'expo-asset';
 import * as Font from 'expo-font';
 import React, { useState } from 'react';
 import { Platform, StatusBar, StyleSheet, View } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 
 import { Provider } from 'react-redux';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
@@ -27,14 +28,14 @@ export default function App(props) {
         !!(!isLoadingComplete && !props.skipLoadingScreen) && (
           <AppLoading
             startAsync={
-              () =>  Promise.all([
+              async () => await Promise.all([
                 Asset.loadAsync([
                   require('./assets/images/kt-logo.png'),
                   require('./assets/images/kt-logo.png'),
                 ]),
                 Font.loadAsync({
+                  ...Ionicons.font,	
                   'space-mono': require('./assets/fonts/SpaceMono-Regular.ttf'),
-                  Ionicons: require("@expo/vector-icons/fonts/Ionicons.ttf")
                 }),
               ])
             }
