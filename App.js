@@ -5,28 +5,14 @@ import React, { useState } from 'react';
 import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
+import { Provider } from 'react-redux';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
+import { composeWithDevTools } from 'redux-devtools-extension';
+
+import reducers from './reducers/combinedReducers';
+
 import AppNavigator from './navigation/AppNavigator';
-
-export default function App(props) {
-  const [isLoadingComplete, setLoadingComplete] = useState(false);
-
-  if (!isLoadingComplete && !props.skipLoadingScreen) {
-    return (
-      <AppLoading
-        startAsync={loadResourcesAsync}
-        onError={handleLoadingError}
-        onFinish={() => handleFinishLoading(setLoadingComplete)}
-      />
-    );
-  } else {
-    return (
-      <View style={styles.container}>
-        {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-        <AppNavigator />
-      </View>
-    );
-  }
-}
 
 async function loadResourcesAsync() {
   await Promise.all([
@@ -45,14 +31,42 @@ async function loadResourcesAsync() {
   ]);
 }
 
-function handleLoadingError(error) {
-  // In this case, you might want to report the error to your error reporting
-  // service, for example Sentry
-  console.warn(error);
-}
 
-function handleFinishLoading(setLoadingComplete) {
-  setLoadingComplete(true);
+export default function App(props) {
+  const [isLoadingComplete, setLoadingComplete] = useState(false);
+
+  return (
+    <Provider store={store}>
+      {
+        !!(!isLoadingComplete && !props.skipLoadingScreen) && (
+          <AppLoading
+            startAsync={
+              async () => await Promise.all([
+                Asset.loadAsync([
+                  require('./assets/images/kt-logo.png'),
+                  require('./assets/images/kt-logo.png'),
+                ]),
+                Font.loadAsync({
+                  ...Ionicons.font,
+                  'space-mono': require('./assets/fonts/SpaceMono-Regular.ttf'),
+                }),
+              ])
+            }
+            onError={() => console.warn(error)}
+            onFinish={() => setLoadingComplete(true)}
+          />
+        )
+      }
+      {
+        isLoadingComplete && (
+          <View style={styles.container}>
+            {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
+            <AppNavigator />
+          </View>
+        )
+      }
+    </Provider>
+  );
 }
 
 const styles = StyleSheet.create({

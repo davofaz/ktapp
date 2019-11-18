@@ -14,20 +14,17 @@ import {
 import Touchable from 'react-native-platform-touchable';
 import { Ionicons } from '@expo/vector-icons';
 import { ScreenOrientation } from  'expo';
+import { connect } from 'react-redux';
+
+import { onNavigationChange } from '../actions/navigation'
 import { MonoText } from '../components/StyledText';
 
 
-export default class HomeScreen extends React.Component{
-  constructor(props) {
-     super(props);
- }
-
-
-   render() {
-    return (
-
-
-
+function HomeScreen ({
+  navigation,
+  onNavChange,
+}) {
+  return (
     <View style={styles.container}>
       <ImageBackground source={require('../assets/images/background-image.jpg')} style={{width: '100%', height: '100%', resizeMode: 'cover'}}>
         <ScrollView
@@ -48,32 +45,44 @@ export default class HomeScreen extends React.Component{
           <View style={styles.homeLinksContainer}>
             <TouchableHighlight
               style={styles.buttonSquare}
-              onPress={() => this.props.navigation.navigate('Sermons')}
+              onPress={() => {
+                onNavChange('Sermons');
+                navigation.navigate('Sermons')
+              }}
               underlayColor='rgba(250, 168, 127, 1)'>
                   <Text style={styles.homeLinkText}>Sermon{"\n"}Archive</Text>
             </TouchableHighlight>
             <TouchableHighlight
               style={styles.buttonSquare}
               onPress={handlePressWatchLive}
-              //onPress={() => this.props.navigation.navigate('Live')}
+              //onPress={() => navigation.navigate('Live')}
               underlayColor='rgba(250, 168, 127, 1)'>
                   <Text style={styles.homeLinkText}>Watch{"\n"}Live</Text>
             </TouchableHighlight>
             <TouchableHighlight
               style={styles.buttonSquare}
-              onPress={() => this.props.navigation.navigate('Whatson')}
+              onPress={() => {
+                onNavChange('Whatson');
+                navigation.navigate('Whatson');
+              }}
               underlayColor='rgba(250, 168, 127, 1)'>
                   <Text style={styles.homeLinkText}>What's{"\n"}On</Text>
             </TouchableHighlight>
           <TouchableHighlight
               style={styles.buttonSquare}
-              onPress={() => this.props.navigation.navigate('Revival')}
+              onPress={() => {
+                onNavChange('Whatson');
+                navigation.navigate('Revival');
+              }}
               underlayColor='rgba(250, 168, 127, 1)'>
                   <Text style={styles.homeLinkText}>Revival{"\n"}Times</Text>
             </TouchableHighlight>
             <TouchableHighlight
               style={styles.buttonSquare}
-              onPress={() => this.props.navigation.navigate('Contactus')}
+              onPress={() => {
+                onNavChange('Contactus');
+                navigation.navigate('Contactus');
+              }}
               underlayColor='rgba(250, 168, 127, 1)'>
                   <Text style={styles.homeLinkText}>Contact{"\n"}Us</Text>
             </TouchableHighlight>
@@ -89,7 +98,6 @@ export default class HomeScreen extends React.Component{
       </ImageBackground>
     </View>
   );
-};
 }
 
 
@@ -269,3 +277,10 @@ const styles = StyleSheet.create({
     marginTop: 1,
   },
 });
+
+export default connect(
+  (state, ownProps) => ({}),
+  dispacth => ({
+    onNavChange: screen => dispacth(onNavigationChange(screen))
+  }),
+)(HomeScreen)
