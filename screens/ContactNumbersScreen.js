@@ -20,6 +20,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { MonoText } from '../components/StyledText';
 import  BookItem  from '../components/BookItem';
 import PhoneListItem from '../components/PhoneListItem';
+import Screen from '../components/Screen';
 
 
 
@@ -51,8 +52,8 @@ export default class ContactNumbersScreen extends React.Component {
       .catch((err) => {
         console.error(err)
       });
+  }
 
-}
   render() {
     const { data, isLoaded} = this.state;
     const {
@@ -76,88 +77,71 @@ export default class ContactNumbersScreen extends React.Component {
     } = this.state.data;
 
     const { goBack } = this.props.navigation;
+
     return (
-    <View style={styles.container}>
-      <ImageBackground source={require('../assets/images/background-image.jpg')} style={{width: '100%', height: '100%', resizeMode: 'cover'}}>
-        <ScrollView
-          style={styles.container}
-          contentContainerStyle={styles.contentContainer}>
-          <View style={styles.welcomeContainer}>
-            <TouchableOpacity onPress={handleLogoPress} style={styles.helpLink}>
-              <Image
-                source={
-                  __DEV__
-                    ? require('../assets/images/kt-logo.png')
-                    : require('../assets/images/kt-logo.png')
-                }
-                style={styles.welcomeImage}
-              />
-            </TouchableOpacity>
-            <Text style={styles.pageTitleText}>Contact Us</Text>
-          </View>
+      <Screen
+        title="Contact us"
+      >
         { isLoaded ? (
           <View style={styles.listContainer}>
-          <FlatList
-          style={{width:'100%'}}
-            data={[
-            {name: 'KT General Information', number: kt_general_information},
-            {name: 'Senior Ministers Office', number: senior_ministers_office},
-            {name: 'Nugen', number: nugen},
-            {name: 'Kids', number: kids},
-            {name: 'Prayer and Visitation', number: prayer_and_visitation},
-            {name: 'LCC Satellite Office', number: lcc_satellite_office},
-            {name: 'Training', number: training},
-            {name: 'Finance', number: finance},
-            {name: 'Encounters', number: encounters},
-            {name: 'Revival Times', number: revival_times},
-            {name: 'KT Bookshop', number: kt_bookshop},
-            {name: 'Dovewell Productions', number: dovewell_productions},
-            {name: 'Community Link', number: community_link},
-            {name: 'Cells/Consolidation', number: cells_consolidation},
-            {name: 'IT', number: it},
-            ]}
-            renderItem={({item}) => {
-              return (
-              <PhoneListItem
-                item={item}
-              />
-            )
-          }}
-            keyExtractor={(item, index) => index.toString()}
+            <FlatList
+              style={{width:'100%'}}
+                data={[
+                {name: 'KT General Information', number: kt_general_information},
+                {name: 'Senior Ministers Office', number: senior_ministers_office},
+                {name: 'Nugen', number: nugen},
+                {name: 'Kids', number: kids},
+                {name: 'Prayer and Visitation', number: prayer_and_visitation},
+                {name: 'LCC Satellite Office', number: lcc_satellite_office},
+                {name: 'Training', number: training},
+                {name: 'Finance', number: finance},
+                {name: 'Encounters', number: encounters},
+                {name: 'Revival Times', number: revival_times},
+                {name: 'KT Bookshop', number: kt_bookshop},
+                {name: 'Dovewell Productions', number: dovewell_productions},
+                {name: 'Community Link', number: community_link},
+                {name: 'Cells/Consolidation', number: cells_consolidation},
+                {name: 'IT', number: it},
+                ]}
+                renderItem={({item}) => {
+                  return (
+                  <PhoneListItem
+                    item={item}
+                  />
+                )
+              }}
+              keyExtractor={(item, index) => index.toString()}
             />
-            
-              <View style={styles.container, {alignSelf: 'center', alignItems: 'center', flexDirection:'row', marginBottom:30}}>
-                <TouchableHighlight
+              
+            <View style={styles.container, {alignSelf: 'center', alignItems: 'center', flexDirection:'row', marginBottom:30}}>
+              <TouchableHighlight
+                style={styles.buttonSquare}
+                onPress={handlePressEmailUs}
+                underlayColor='rgba(250, 168, 127, 1)'>
+                    <Text style={styles.homeLinkText2}>Send us{"\n"}a message</Text>
+              </TouchableHighlight>
+              <TouchableHighlight
                   style={styles.buttonSquare}
-                  onPress={handlePressEmailUs}
+                  onPress={() => goBack()} title="Go back"
                   underlayColor='rgba(250, 168, 127, 1)'>
-                      <Text style={styles.homeLinkText2}>Send us{"\n"}a message</Text>
+                    <Text style={styles.homeLinkText}>Go{"\n"}Back{"\n"}
+                      <Ionicons
+                        style={{display:'flex'}}
+                        size={32}
+                        name={Platform.OS === 'ios'
+                        ? 'ios-arrow-back' : 'md-arrow-back'}/>
+                    </Text>
                 </TouchableHighlight>
-                <TouchableHighlight
-                    style={styles.buttonSquare}
-                    onPress={() => goBack()} title="Go back"
-                    underlayColor='rgba(250, 168, 127, 1)'>
-                      <Text style={styles.homeLinkText}>Go{"\n"}Back{"\n"}
-                        <Ionicons
-                          style={{display:'flex'}}
-                          size={32}
-                          name={Platform.OS === 'ios'
-                          ? 'ios-arrow-back' : 'md-arrow-back'}/>
-                      </Text>
-                  </TouchableHighlight>
-              </View>
-
             </View>
-        ) : (
-        <View style={{ flex: 1, padding: 20 }}>
-          <ActivityIndicator size="large" color="#ffffff"/>
-        </View>
-      )}
-    </ScrollView>
-  </ImageBackground>
-</View>
-);
-}
+          </View>
+          ) : (
+          <View style={{ flex: 1, padding: 20 }}>
+            <ActivityIndicator size="large" color="#ffffff"/>
+          </View>
+        )}
+      </Screen>
+    );
+  }
 }
 
 
@@ -165,8 +149,6 @@ export default class ContactNumbersScreen extends React.Component {
 ContactNumbersScreen.navigationOptions = {
   header: null,
 };
-
-
 
 
 function handleLogoPress() {

@@ -19,7 +19,7 @@ import Touchable from 'react-native-platform-touchable';
 import { Ionicons } from '@expo/vector-icons';
 import { MonoText } from '../components/StyledText';
 import  CalendarItem  from '../components/CalendarItem';
-
+import Screen from '../components/Screen';
 
 
 export default class WhatsOnScreen extends React.Component {
@@ -47,31 +47,16 @@ export default class WhatsOnScreen extends React.Component {
         console.error(err)
       });
       //console.log(responseJson);
+  }
 
-}
   render() {
     const { booksRT, isLoaded } = this.state;
     //console.log(this.state.booksRT);
     const { goBack } = this.props.navigation;
     return (
-    <View style={styles.container}>
-      <ImageBackground source={require('../assets/images/background-image.jpg')} style={{width: '100%', height: '100%', resizeMode: 'cover'}}>
-        <ScrollView
-          style={styles.container}
-          contentContainerStyle={styles.contentContainer}>
-          <View style={styles.welcomeContainer}>
-            <TouchableOpacity onPress={handleLogoPress}>
-              <Image
-                source={
-                  __DEV__
-                    ? require('../assets/images/kt-logo.png')
-                    : require('../assets/images/kt-logo.png')
-                }
-                style={styles.welcomeImage}
-              />
-            </TouchableOpacity>
-            <Text style={styles.pageTitleText}>What's On</Text>
-          </View>
+      <Screen
+        title="What's On"
+      >
         { isLoaded ? (
           <View style={{flex: 1, paddingTop: 5, alignItems: 'center'}}>
             <FlatList
@@ -107,17 +92,14 @@ export default class WhatsOnScreen extends React.Component {
               </TouchableHighlight>
             </View>
           </View>
-        ) : (
-        <View style={{ flex: 1, padding: 20 }}>
-          <ActivityIndicator size="large" color="#ffffff"/>
-        </View>
-      )}
-
-    </ScrollView>
-  </ImageBackground>
-  </View>
-);
-}
+          ) : (
+          <View style={{ flex: 1, padding: 20 }}>
+            <ActivityIndicator size="large" color="#ffffff"/>
+          </View>
+        )}
+      </Screen>
+    );
+  }
 }
 
 

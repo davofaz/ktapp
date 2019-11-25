@@ -17,6 +17,7 @@ import Touchable from 'react-native-platform-touchable';
 import { Ionicons } from '@expo/vector-icons';
 import { ScreenOrientation } from  'expo';
 import { MonoText } from '../components/StyledText';
+import Screen from '../components/Screen';
 
 export default class LiveScreen extends React.Component{
     constructor(props) {
@@ -27,73 +28,57 @@ export default class LiveScreen extends React.Component{
        }
    }
 
-    render() {
-      const { goBack } = this.props.navigation;
-      const {
-           webviewBackgroundColor,
-       } = this.state;
-      return (
-        <View style={styles.container}>
-          <ImageBackground source={require('../assets/images/background-image.jpg')} style={{width: '100%', height: '100%', resizeMode: 'cover'}}>
-            <ScrollView
-              style={styles.container}
-              contentContainerStyle={styles.contentContainer}>
-              <View style={styles.welcomeContainer}>
-                <TouchableOpacity onPress={handleLogoPress} style={styles.helpLink}>
-                  <Image
-                    source={
-                      __DEV__
-                        ? require('../assets/images/kt-logo.png')
-                        : require('../assets/images/kt-logo.png')
-                    }
-                    style={styles.welcomeImage}
-                  />
-                </TouchableOpacity>
-              </View>
+  render() {
+    const { goBack } = this.props.navigation;
+    const {
+          webviewBackgroundColor,
+      } = this.state;
+    return (
+      <Screen>
+        <View 
+          style={{
+            /*opacity: this.state.loaded ? 1 : 0,*/ 
+            alignItems: 'center',
+            marginHorizontal: 50}}
+        >
+          {/*}<Text style={styles.homeLinkText}>Watch{"\n"}Live</Text>*/}
+          <WebView
+            //style={{flex:1, height:300, width:360}}
+            style={{ marginTop: 20, marginBottom: 40, width: 360, height: 600, flex: 1, backgroundColor: 'transparent' }}
+            javaScriptEnabled={true}
+            domStorageEnabled={true}
+            //source={{ uri: "https://www.youtube.com/embed/live_stream?channel=UCzX6DlYZ5XcWgt4dGVdrpWA&rel=0&autoplay=1&showinfo=0&controls=0&fullscreen=1" }}
+            source={{ uri: "https://www.youtube.com/channel/UCzX6DlYZ5XcWgt4dGVdrpWA/live"}}
+            //source={{ uri: "https://www.youtube.com/embed/live_stream?channel=UCzX6DlYZ5XcWgt4dGVdrpWA" }}
+            // onLoadEnd={(e) => {
+            //    if (!this.state.loaded) {
+            //      this.setState({ loaded: true });
 
-              <View style={{/*opacity: this.state.loaded ? 1 : 0,*/ alignItems: 'center',
-              marginHorizontal: 50}}>
-              {/*}<Text style={styles.homeLinkText}>Watch{"\n"}Live</Text>*/}
-              <WebView
-                //style={{flex:1, height:300, width:360}}
-                style={{ marginTop: 20, marginBottom: 40, width: 360, height: 600, flex: 1, backgroundColor: 'transparent' }}
-                javaScriptEnabled={true}
-                domStorageEnabled={true}
-                //source={{ uri: "https://www.youtube.com/embed/live_stream?channel=UCzX6DlYZ5XcWgt4dGVdrpWA&rel=0&autoplay=1&showinfo=0&controls=0&fullscreen=1" }}
-                source={{ uri: "https://www.youtube.com/channel/UCzX6DlYZ5XcWgt4dGVdrpWA/live"}}
-                //source={{ uri: "https://www.youtube.com/embed/live_stream?channel=UCzX6DlYZ5XcWgt4dGVdrpWA" }}
-                // onLoadEnd={(e) => {
-                //    if (!this.state.loaded) {
-                //      this.setState({ loaded: true });
-
-                //    }
-                //  }}
-              />
-                <View style={styles.container, {alignItems: 'center', flexDirection:'row'}}>
-                  <TouchableHighlight
-                    style={styles.flexItem}
-                    onPress={handlePressWatchLive}
-                    underlayColor='rgba(250, 168, 127, 0.7)'>
-                        <Text style={styles.homeLinkText}>Watch on{"\n"}our website</Text>
-                  </TouchableHighlight>
-                  <TouchableHighlight
-                      style={styles.flexItem}
-                      onPress={() => goBack()} title="Go back"
-                      underlayColor='rgba(250, 168, 127, 0.7)'>
-                        <Text style={styles.homeLinkText}>Go{"\n"}Back{"\n"}
-                          <Ionicons
-                            style={{display:'flex'}}
-                            size={32}
-                            name={Platform.OS === 'ios'
-                            ? 'ios-arrow-back' : 'md-arrow-back'}/>
-                        </Text>
-                    </TouchableHighlight>
-                </View>
-              </View>
-
-            </ScrollView>
-          </ImageBackground>
+            //    }
+            //  }}
+          />
+          <View style={styles.container, {alignItems: 'center', flexDirection:'row'}}>
+            <TouchableHighlight
+              style={styles.flexItem}
+              onPress={handlePressWatchLive}
+              underlayColor='rgba(250, 168, 127, 0.7)'>
+                  <Text style={styles.homeLinkText}>Watch on{"\n"}our website</Text>
+            </TouchableHighlight>
+            <TouchableHighlight
+                style={styles.flexItem}
+                onPress={() => goBack()} title="Go back"
+                underlayColor='rgba(250, 168, 127, 0.7)'>
+                  <Text style={styles.homeLinkText}>Go{"\n"}Back{"\n"}
+                    <Ionicons
+                      style={{display:'flex'}}
+                      size={32}
+                      name={Platform.OS === 'ios'
+                      ? 'ios-arrow-back' : 'md-arrow-back'}/>
+                  </Text>
+              </TouchableHighlight>
+          </View>
         </View>
+      </Screen>
     );
   }
 };
@@ -102,9 +87,6 @@ export default class LiveScreen extends React.Component{
 LiveScreen.navigationOptions = {
   header: null,
 };
-
-
-
 
 function handleLogoPress() {
   WebBrowser.openBrowserAsync(
