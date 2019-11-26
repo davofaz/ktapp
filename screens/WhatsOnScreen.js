@@ -1,5 +1,5 @@
 import * as WebBrowser from 'expo-web-browser';
-import React from 'react';
+import React, { useEffect }  from 'react';
 import {
   Image,
   Button,
@@ -17,43 +17,33 @@ import {
 } from 'react-native';
 import Touchable from 'react-native-platform-touchable';
 import { Ionicons } from '@expo/vector-icons';
+import { connect } from 'react-redux';
+
+import { getEvents } from '../actions/whatsOns';
 import { MonoText } from '../components/StyledText';
 import  CalendarItem  from '../components/CalendarItem';
 
 
 
-export default class WhatsOnScreen extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-       isLoaded: false,
-       booksRT: [],
-     };
-  }
+function WhatsOnScreen ({
+  getEventsAction,
+  navigation,
+  booksRT,
+  loaded,
+}) {
 
-  componentDidMount() {
-    return fetch ('https://www.kt.org/wp-json/tribe/events/v1/events')
-      .then(response => response.json())
-      .then(responseJson => {
-        this.setState(
-          {
-            booksRT: responseJson.events,
-            isLoaded: true
-          },
-          function() {}
-        );
-      })
-      .catch((err) => {
-        console.error(err)
-      });
-      //console.log(responseJson);
+  const { goBack } = navigation;
 
-}
-  render() {
-    const { booksRT, isLoaded } = this.state;
-    //console.log(this.state.booksRT);
-    const { goBack } = this.props.navigation;
-    return (
+  useEffect(
+    () => {
+      if (!loaded) {
+        getEventsAction();
+      }
+    },
+    [loaded],
+  );
+
+  return (
     <View style={styles.container}>
       <ImageBackground source={require('../assets/images/background-image.jpg')} style={{width: '100%', height: '100%', resizeMode: 'cover'}}>
         <ScrollView
@@ -72,11 +62,12 @@ export default class WhatsOnScreen extends React.Component {
             </TouchableOpacity>
             <Text style={styles.pageTitleText}>What's On</Text>
           </View>
-        { isLoaded ? (
+        { booksRT !== undefined
+           ? (
           <View style={{flex: 1, paddingTop: 5, alignItems: 'center'}}>
             <FlatList
               style={{width:'100%'}}
-              data={this.state.booksRT}
+              data={booksRT}
               renderItem={({ item }) => {
                 return (
                   <CalendarItem
@@ -118,15 +109,10 @@ export default class WhatsOnScreen extends React.Component {
   </View>
 );
 }
-}
-
-
 
 WhatsOnScreen.navigationOptions = {
   header: null,
 };
-
-
 
 
 function handleLogoPress() {
@@ -267,3 +253,13 @@ const styles = StyleSheet.create({
     marginTop: 1,
   },
 });
+
+export default connect(
+  (state, ownProps) => ({
+    loaded: state.event.loaded,
+    booksRT: state.event.data,
+  }),
+  dispatch => ({
+    getEventsAction: () => dispatch(getEvents())
+  }),
+)(WhatsOnScreen)

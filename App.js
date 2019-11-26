@@ -14,22 +14,10 @@ import reducers from './reducers/combinedReducers';
 
 import AppNavigator from './navigation/AppNavigator';
 
-async function loadResourcesAsync() {
-  await Promise.all([
-    Asset.loadAsync([
-      require('./assets/images/kt-logo.png'),
-      require('./assets/images/kt-logo.png'),
-    ]),
-    await Expo.Font.loadAsync({
-      // This is the font that we are using for our tab bar
-      //...Ionicons.font,
-      'ionicons': require('@expo/vector-icons/build/vendor/react-native-vector-icons/Fonts/Ionicons.ttf'),
-      // We include SpaceMono because we use it in HomeScreen.js. Feel free to
-      // remove this if you are not using it in your app
-      'space-mono': require('./assets/fonts/SpaceMono-Regular.ttf'),
-    }),
-  ]);
-}
+const store = createStore(
+  reducers,
+  __DEV__ ? composeWithDevTools(applyMiddleware(thunk)) : applyMiddleware(thunk),
+);
 
 
 export default function App(props) {
@@ -46,8 +34,9 @@ export default function App(props) {
                   require('./assets/images/kt-logo.png'),
                   require('./assets/images/kt-logo.png'),
                 ]),
-                Font.loadAsync({
-                  ...Ionicons.font,
+                await Expo.Font.loadAsync({
+                  //...Ionicons.font,
+                  'ionicons': require('@expo/vector-icons/build/vendor/react-native-vector-icons/Fonts/Ionicons.ttf'),
                   'space-mono': require('./assets/fonts/SpaceMono-Regular.ttf'),
                 }),
               ])

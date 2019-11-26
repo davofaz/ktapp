@@ -71,7 +71,7 @@ function HomeScreen ({
           <TouchableHighlight
               style={styles.buttonSquare}
               onPress={() => {
-                onNavChange('Whatson');
+                onNavChange('Revival');
                 navigation.navigate('Revival');
               }}
               underlayColor='rgba(250, 168, 127, 1)'>

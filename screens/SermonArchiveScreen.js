@@ -61,8 +61,8 @@ function SermonArchiveScreen ({
             </TouchableOpacity>
             <Text style={styles.pageTitleText}>Latest Sermons</Text>
           </View>
-          { 
-            booksRT !== undefined 
+          {
+            booksRT !== undefined
               ? (
               <View style={{flex: 1, paddingTop: 5, alignItems: 'center'}}>
 
@@ -99,7 +99,7 @@ function SermonArchiveScreen ({
                   </TouchableHighlight>
                 </View>
               </View>
-              ) 
+              )
             : (
               <View style={{ flex: 1, padding: 20 }}>
                 <ActivityIndicator size="large" color="#ffffff"/>
@@ -260,7 +260,7 @@ export default connect(
     loaded: state.sermon.loaded,
     booksRT: state.sermon.data,
   }),
-  dispacth => ({
-    getSermonsAction: () => dispacth(getSermons())
+  dispatch => ({
+    getSermonsAction: () => dispatch(getSermons())
   }),
 )(SermonArchiveScreen)
