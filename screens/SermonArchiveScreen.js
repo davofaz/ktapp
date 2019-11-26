@@ -214,7 +214,7 @@ export default connect(
     loaded: state.sermon.loaded,
     booksRT: state.sermon.data,
   }),
-  dispacth => ({
-    getSermonsAction: () => dispacth(getSermons())
+  dispatch => ({
+    getSermonsAction: () => dispatch(getSermons())
   }),
 )(SermonArchiveScreen)
