@@ -1,5 +1,5 @@
 import * as WebBrowser from 'expo-web-browser';
-import React from 'react';
+import React, { useEffect }  from 'react';
 import {
   Image,
   Button,
@@ -17,61 +17,52 @@ import {
 } from 'react-native';
 import Touchable from 'react-native-platform-touchable';
 import { Ionicons } from '@expo/vector-icons';
+import { connect } from 'react-redux';
+
+import { getEvents } from '../actions/whatsOns';
 import { MonoText } from '../components/StyledText';
 import  CalendarItem  from '../components/CalendarItem';
 import Screen from '../components/Screen';
 
 
-export default class WhatsOnScreen extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-       isLoaded: false,
-       booksRT: [],
-     };
-  }
+function WhatsOnScreen ({
+  getEventsAction,
+  navigation,
+  booksRT,
+  loaded,
+}) {
+  const { goBack } = navigation;
 
-  componentDidMount() {
-    return fetch ('https://www.kt.org/wp-json/tribe/events/v1/events')
-      .then(response => response.json())
-      .then(responseJson => {
-        this.setState(
-          {
-            booksRT: responseJson.events,
-            isLoaded: true
-          },
-          function() {}
-        );
-      })
-      .catch((err) => {
-        console.error(err)
-      });
-      //console.log(responseJson);
-  }
+  useEffect(
+    () => {
+      if (!loaded) {
+        getEventsAction();
+      }
+    },
+    [loaded],
+  );
 
-  render() {
-    const { booksRT, isLoaded } = this.state;
-    //console.log(this.state.booksRT);
-    const { goBack } = this.props.navigation;
-    return (
-      <Screen
-        title="What's On"
-      >
-        { isLoaded ? (
-          <View style={{flex: 1, paddingTop: 5, alignItems: 'center'}}>
-            <FlatList
-              style={{width:'100%'}}
-              data={this.state.booksRT}
-              renderItem={({ item }) => {
-                return (
-                  <CalendarItem
-                    item = {item}
-                  />
-                )
-              }}
-              keyExtractor={(item, index) => index.toString()}
-            />
-            <View style={styles.container, {alignItems: 'center', flexDirection:'row', marginBottom:30}}>
+  return (
+    <Screen
+      title="What's On"
+    >
+      {
+        booksRT !== undefined
+         ? (
+        <View style={{flex: 1, paddingTop: 5, alignItems: 'center'}}>
+          <FlatList
+            style={{width:'100%'}}
+            data={booksRT}
+            renderItem={({ item }) => {
+              return (
+                <CalendarItem
+                  item = {item}
+                />
+              )
+            }}
+            keyExtractor={(item, index) => index.toString()}
+          />
+          <View style={styles.container, {alignItems: 'center', flexDirection:'row', marginBottom:30}}>
             <TouchableHighlight
               style={styles.buttonSquare}
               onPress={handlePressSeeMoreRT}
@@ -92,23 +83,19 @@ export default class WhatsOnScreen extends React.Component {
               </TouchableHighlight>
             </View>
           </View>
-          ) : (
-          <View style={{ flex: 1, padding: 20 }}>
-            <ActivityIndicator size="large" color="#ffffff"/>
-          </View>
-        )}
+        ) : (
+        <View style={{ flex: 1, padding: 20 }}>
+          <ActivityIndicator size="large" color="#ffffff"/>
+        </View>
+      )}
       </Screen>
     );
   }
-}
-
 
 
 WhatsOnScreen.navigationOptions = {
   header: null,
 };
-
-
 
 
 function handleLogoPress() {
@@ -249,3 +236,13 @@ const styles = StyleSheet.create({
     marginTop: 1,
   },
 });
+
+export default connect(
+  (state, ownProps) => ({
+    loaded: state.event.loaded,
+    booksRT: state.event.data,
+  }),
+  dispatch => ({
+    getEventsAction: () => dispatch(getEvents())
+  }),
+)(WhatsOnScreen)
