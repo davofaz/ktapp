@@ -39,7 +39,7 @@ export default function App(props) {
                 }),
               ])
             }
-            onError={() => console.warn(error)}
+            onError={(error) => console.warn(error)}
             onFinish={() => setLoadingComplete(true)}
           />
         )
