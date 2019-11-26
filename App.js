@@ -14,6 +14,12 @@ import reducers from './reducers/combinedReducers';
 
 import AppNavigator from './navigation/AppNavigator';
 
+
+const store = createStore(
+  reducers,
+  __DEV__ ? composeWithDevTools(applyMiddleware(thunk)) : applyMiddleware(thunk),
+);
+
 async function loadResourcesAsync() {
   await Promise.all([
     Asset.loadAsync([
