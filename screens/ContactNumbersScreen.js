@@ -1,5 +1,5 @@
 import * as WebBrowser from 'expo-web-browser';
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   Image,
   Button,
@@ -15,46 +15,45 @@ import {
   TouchableHighlight,
   ActivityIndicator,
 } from 'react-native';
-import Touchable from 'react-native-platform-touchable';
+//import Touchable from 'react-native-platform-touchable';
 import { Ionicons } from '@expo/vector-icons';
-import { MonoText } from '../components/StyledText';
+import { connect } from 'react-redux';
+
+import { getSermons } from '../actions/sermonArchives';
+//import { MonoText } from '../components/StyledText';
 import  BookItem  from '../components/BookItem';
 import PhoneListItem from '../components/PhoneListItem';
 import Screen from '../components/Screen';
 
 
+//
+// export default class ContactNumbersScreen extends React.Component {
+//   constructor(props) {
+//     super(props);
+//     this.state = {
+//        isLoaded: false,
+//        data: [],
+//      };
+//   }
 
-export default class ContactNumbersScreen extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-       isLoaded: false,
-       data: [],
-     };
-  }
+function SermonArchiveScreen ({
+  getContactsAction,
+  navigation,
+  booksRT,
+  loaded,
+}) {
 
-  componentDidMount() {
-    return fetch ('https://www.kt.org/wp-json/wp/v2/pages/23957')
-      .then(response => response.json())
-      .then(responseJson => {
-        //console.log(responseJson)
-        // let filteredResponseJson = responseJson.post_meta_fields.filter(item => item.baptism === "020 8799 6152")
-        // console.log(filteredResponseJson)
-        this.setState(
-          {
-            data: responseJson.post_meta_fields,
-            // data: filteredResponseJson,
-            isLoaded: true
-          },
-          function() {}
-        );
-      })
-      .catch((err) => {
-        console.error(err)
-      });
-  }
+  const { goBack } = navigation;
 
-  render() {
+  useEffect(
+    () => {
+      if (!loaded) {
+        getContactsAction();
+      }
+    },
+    [loaded],
+  );
+
     const { data, isLoaded} = this.state;
     const {
       kt_general_information,
@@ -112,7 +111,7 @@ export default class ContactNumbersScreen extends React.Component {
               }}
               keyExtractor={(item, index) => index.toString()}
             />
-              
+
             <View style={styles.container, {alignSelf: 'center', alignItems: 'center', flexDirection:'row', marginBottom:30}}>
               <TouchableHighlight
                 style={styles.buttonSquare}
@@ -142,7 +141,6 @@ export default class ContactNumbersScreen extends React.Component {
       </Screen>
     );
   }
-}
 
 
 
