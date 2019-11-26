@@ -1,102 +1,75 @@
 import * as WebBrowser from 'expo-web-browser';
 import React from 'react';
 import {
-  Image,
   Platform,
-  ScrollView,
   StyleSheet,
   Text,
-  TouchableOpacity,
   TouchableHighlight,
   View,
-  ImageBackground,
 } from 'react-native';
-import Touchable from 'react-native-platform-touchable';
-import { Ionicons } from '@expo/vector-icons';
-import { ScreenOrientation } from  'expo';
 import { connect } from 'react-redux';
 
 import { onNavigationChange } from '../actions/navigation'
-import { MonoText } from '../components/StyledText';
-
+import Screen from '../components/Screen';
 
 function HomeScreen ({
   navigation,
   onNavChange,
 }) {
   return (
-    <View style={styles.container}>
-      <ImageBackground source={require('../assets/images/background-image.jpg')} style={{width: '100%', height: '100%', resizeMode: 'cover'}}>
-        <ScrollView
-          style={styles.container}
-          contentContainerStyle={styles.contentContainer}>
-          <View style={styles.welcomeContainer}>
-            <TouchableOpacity onPress={handleLogoPress}>
-              <Image
-                source={
-                  __DEV__
-                    ? require('../assets/images/kt-logo.png')
-                    : require('../assets/images/kt-logo.png')
-                }
-                style={styles.welcomeImage}
-              />
-            </TouchableOpacity>
-          </View>
-          <View style={styles.homeLinksContainer}>
-            <TouchableHighlight
-              style={styles.buttonSquare}
-              onPress={() => {
-                onNavChange('Sermons');
-                navigation.navigate('Sermons')
-              }}
-              underlayColor='rgba(250, 168, 127, 1)'>
-                  <Text style={styles.homeLinkText}>Sermon{"\n"}Archive</Text>
-            </TouchableHighlight>
-            <TouchableHighlight
-              style={styles.buttonSquare}
-              onPress={handlePressWatchLive}
-              //onPress={() => navigation.navigate('Live')}
-              underlayColor='rgba(250, 168, 127, 1)'>
-                  <Text style={styles.homeLinkText}>Watch{"\n"}Live</Text>
-            </TouchableHighlight>
-            <TouchableHighlight
-              style={styles.buttonSquare}
-              onPress={() => {
-                onNavChange('Whatson');
-                navigation.navigate('Whatson');
-              }}
-              underlayColor='rgba(250, 168, 127, 1)'>
-                  <Text style={styles.homeLinkText}>What's{"\n"}On</Text>
-            </TouchableHighlight>
-          <TouchableHighlight
-              style={styles.buttonSquare}
-              onPress={() => {
-                onNavChange('Revival');
-                navigation.navigate('Revival');
-              }}
-              underlayColor='rgba(250, 168, 127, 1)'>
-                  <Text style={styles.homeLinkText}>Revival{"\n"}Times</Text>
-            </TouchableHighlight>
-            <TouchableHighlight
-              style={styles.buttonSquare}
-              onPress={() => {
-                onNavChange('Contactus');
-                navigation.navigate('Contactus');
-              }}
-              underlayColor='rgba(250, 168, 127, 1)'>
-                  <Text style={styles.homeLinkText}>Contact{"\n"}Us</Text>
-            </TouchableHighlight>
-            <TouchableHighlight
-              style={styles.buttonSquare}
-              onPress={handlePressDonate}
-              underlayColor='rgba(250, 168, 127, 1)'>
-                  <Text style={styles.homeLinkText}>Make a{"\n"}Donation</Text>
-            </TouchableHighlight>
-          </View>
-        </ScrollView>
-
-      </ImageBackground>
-    </View>
+    <Screen>
+      <View style={styles.homeLinksContainer}>
+        <TouchableHighlight
+          style={styles.buttonSquare}
+          onPress={() => {
+            onNavChange('Sermons');
+            navigation.navigate('Sermons')
+          }}
+          underlayColor='rgba(250, 168, 127, 1)'>
+              <Text style={styles.homeLinkText}>Sermon{"\n"}Archive</Text>
+        </TouchableHighlight>
+        <TouchableHighlight
+          style={styles.buttonSquare}
+          onPress={handlePressWatchLive}
+          //onPress={() => navigation.navigate('Live')}
+          underlayColor='rgba(250, 168, 127, 1)'>
+              <Text style={styles.homeLinkText}>Watch{"\n"}Live</Text>
+        </TouchableHighlight>
+        <TouchableHighlight
+          style={styles.buttonSquare}
+          onPress={() => {
+            onNavChange('Whatson');
+            navigation.navigate('Whatson');
+          }}
+          underlayColor='rgba(250, 168, 127, 1)'>
+              <Text style={styles.homeLinkText}>What's{"\n"}On</Text>
+        </TouchableHighlight>
+        <TouchableHighlight
+          style={styles.buttonSquare}
+          onPress={() => {
+            onNavChange('Whatson');
+            navigation.navigate('Revival');
+          }}
+          underlayColor='rgba(250, 168, 127, 1)'>
+              <Text style={styles.homeLinkText}>Revival{"\n"}Times</Text>
+        </TouchableHighlight>
+        <TouchableHighlight
+          style={styles.buttonSquare}
+          onPress={() => {
+            onNavChange('Contactus');
+            navigation.navigate('Contactus');
+          }}
+          underlayColor='rgba(250, 168, 127, 1)'>
+              <Text style={styles.homeLinkText}>Contact{"\n"}Us</Text>
+        </TouchableHighlight>
+        <TouchableHighlight
+          style={styles.buttonSquare}
+          onPress={handlePressDonate}
+          underlayColor='rgba(250, 168, 127, 1)'>
+            <Text style={styles.homeLinkText}>Make a{"\n"}Donation</Text>
+        </TouchableHighlight>
+      </View>
+    </Screen>
   );
 }
 
@@ -104,13 +77,6 @@ function HomeScreen ({
 HomeScreen.navigationOptions = {
   header: null,
 };
-
-function handleLogoPress() {
-  WebBrowser.openBrowserAsync(
-
-    'https://www.kt.org'
-  );
-}
 
 function handlePressWatchLive() {
   WebBrowser.openBrowserAsync(
@@ -145,32 +111,12 @@ function handlePressDonate() {
 
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'rgba(137, 167, 165, 0.8)',
-  },
   developmentModeText: {
     marginBottom: 20,
     color: 'rgba(0,0,0,0.4)',
     fontSize: 14,
     lineHeight: 19,
     textAlign: 'center',
-  },
-  contentContainer: {
-    paddingTop: 50,
-    flex: 1,
-  },
-  welcomeContainer: {
-    alignItems: 'center',
-    marginTop: 10,
-    marginBottom: 20,
-  },
-  welcomeImage: {
-    width: 100,
-    height: 80,
-    resizeMode: 'contain',
-    marginTop: 3,
-    marginLeft: 0,
   },
   buttonSquare: {
     padding: 15,

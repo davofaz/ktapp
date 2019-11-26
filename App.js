@@ -19,7 +19,6 @@ const store = createStore(
   __DEV__ ? composeWithDevTools(applyMiddleware(thunk)) : applyMiddleware(thunk),
 );
 
-
 export default function App(props) {
   const [isLoadingComplete, setLoadingComplete] = useState(false);
 
@@ -35,7 +34,6 @@ export default function App(props) {
                   require('./assets/images/kt-logo.png'),
                 ]),
                 await Expo.Font.loadAsync({
-                  //...Ionicons.font,
                   'ionicons': require('@expo/vector-icons/build/vendor/react-native-vector-icons/Fonts/Ionicons.ttf'),
                   'space-mono': require('./assets/fonts/SpaceMono-Regular.ttf'),
                 }),

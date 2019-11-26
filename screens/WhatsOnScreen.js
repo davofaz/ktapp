@@ -22,7 +22,7 @@ import { connect } from 'react-redux';
 import { getEvents } from '../actions/whatsOns';
 import { MonoText } from '../components/StyledText';
 import  CalendarItem  from '../components/CalendarItem';
-
+import Screen from '../components/Screen';
 
 
 function WhatsOnScreen ({
@@ -31,7 +31,6 @@ function WhatsOnScreen ({
   booksRT,
   loaded,
 }) {
-
   const { goBack } = navigation;
 
   useEffect(
@@ -44,40 +43,24 @@ function WhatsOnScreen ({
   );
 
   return (
-    <View style={styles.container}>
-      <ImageBackground source={require('../assets/images/background-image.jpg')} style={{width: '100%', height: '100%', resizeMode: 'cover'}}>
-        <ScrollView
-          style={styles.container}
-          contentContainerStyle={styles.contentContainer}>
-          <View style={styles.welcomeContainer}>
-            <TouchableOpacity onPress={handleLogoPress}>
-              <Image
-                source={
-                  __DEV__
-                    ? require('../assets/images/kt-logo.png')
-                    : require('../assets/images/kt-logo.png')
-                }
-                style={styles.welcomeImage}
-              />
-            </TouchableOpacity>
-            <Text style={styles.pageTitleText}>What's On</Text>
-          </View>
-        { booksRT !== undefined
-           ? (
-          <View style={{flex: 1, paddingTop: 5, alignItems: 'center'}}>
-            <FlatList
-              style={{width:'100%'}}
-              data={booksRT}
-              renderItem={({ item }) => {
-                return (
-                  <CalendarItem
-                    item = {item}
-                  />
-                )
-              }}
-              keyExtractor={(item, index) => index.toString()}
-            />
-            <View style={styles.container, {alignItems: 'center', flexDirection:'row', marginBottom:30}}>
+    <Screen
+      title="What's On"
+    >
+      { isLoaded ? (
+        <View style={{flex: 1, paddingTop: 5, alignItems: 'center'}}>
+          <FlatList
+            style={{width:'100%'}}
+            data={booksRT}
+            renderItem={({ item }) => {
+              return (
+                <CalendarItem
+                  item = {item}
+                />
+              )
+            }}
+            keyExtractor={(item, index) => index.toString()}
+          />
+          <View style={styles.container, {alignItems: 'center', flexDirection:'row', marginBottom:30}}>
             <TouchableHighlight
               style={styles.buttonSquare}
               onPress={handlePressSeeMoreRT}
@@ -103,12 +86,11 @@ function WhatsOnScreen ({
           <ActivityIndicator size="large" color="#ffffff"/>
         </View>
       )}
-
-    </ScrollView>
-  </ImageBackground>
-  </View>
-);
+      </Screen>
+    );
+  }
 }
+
 
 WhatsOnScreen.navigationOptions = {
   header: null,
