@@ -46,7 +46,9 @@ function WhatsOnScreen ({
     <Screen
       title="What's On"
     >
-      { isLoaded ? (
+      {
+        booksRT !== undefined
+         ? (
         <View style={{flex: 1, paddingTop: 5, alignItems: 'center'}}>
           <FlatList
             style={{width:'100%'}}
@@ -89,7 +91,6 @@ function WhatsOnScreen ({
       </Screen>
     );
   }
-}
 
 
 WhatsOnScreen.navigationOptions = {
