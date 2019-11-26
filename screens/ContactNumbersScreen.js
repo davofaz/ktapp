@@ -36,11 +36,12 @@ import Screen from '../components/Screen';
 //      };
 //   }
 
-function SermonArchiveScreen ({
+function ContactNumbersScreen ({
   getContactsAction,
   navigation,
   booksRT,
   loaded,
+  departments,
 }) {
 
   const { goBack } = navigation;
@@ -54,7 +55,7 @@ function SermonArchiveScreen ({
     [loaded],
   );
 
-    const { data, isLoaded} = this.state;
+    //const { data, isLoaded} = this.state;
     const {
       kt_general_information,
       senior_ministers_office,
@@ -73,15 +74,15 @@ function SermonArchiveScreen ({
       it,
       community_link,
       cells_consolidation,
-    } = this.state.data;
+    } = departments;
 
-    const { goBack } = this.props.navigation;
 
     return (
       <Screen
         title="Contact us"
       >
-        { isLoaded ? (
+        { booksRT !== undefined
+           ? (
           <View style={styles.listContainer}>
             <FlatList
               style={{width:'100%'}}
@@ -319,3 +320,13 @@ const styles = StyleSheet.create({
     marginTop: 1,
   },
 });
+
+export default connect(
+  (state, ownProps) => ({
+    loaded: state.contact.loaded,
+    booksRT: state.contact.data,
+  }),
+  dispatch => ({
+    getContactsAction: () => dispatch(getContacts())
+  }),
+)(ContactNumbersScreen)

@@ -7,3 +7,7 @@ export const GET_SERMONS_ERROR = 'getSermonsError';
 export const GET_EVENTS = 'getEvents';
 export const GET_EVENTS_SUCCESS = 'getEventsSuccess';
 export const GET_EVENTS_ERROR = 'getEventsError';
+
+export const GET_CONTACTS = 'getContacts';
+export const GET_CONTACTS_SUCCESS = 'getContactsSuccess';
+export const GET_CONTACTS_ERROR = 'getContactsError';
