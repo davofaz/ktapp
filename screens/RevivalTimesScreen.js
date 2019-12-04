@@ -1,5 +1,5 @@
 import * as WebBrowser from 'expo-web-browser';
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   Image,
   Button,
@@ -15,68 +15,44 @@ import {
   TouchableHighlight,
   ActivityIndicator,
 } from 'react-native';
-import Touchable from 'react-native-platform-touchable';
 import { Ionicons } from '@expo/vector-icons';
-import { MonoText } from '../components/StyledText';
+import { connect } from 'react-redux';
+
+import { getMags } from '../actions/rTs';
 import  BookItem  from '../components/BookItem';
+import Screen from '../components/Screen';
 
 
+function RevivalTimesScreen ({
+  getMagsAction,
+  navigation,
+  booksRT,
+  loaded,
+}) {
 
-export default class RevivalTimesScreen extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-       isLoaded: false,
-       booksRT: [],
-     };
-  }
+  const { goBack } = navigation;
 
-  componentDidMount() {
-    return fetch ('https://www.kt.org/wp-json/wp/v2/posts?categories=218')
-      .then(response => response.json())
-      .then(responseJson => {
-        this.setState(
-          {
-            booksRT: responseJson,
-            isLoaded: true
-          },
-          function() {}
-        );
-      })
-      .catch((err) => {
-        console.error(err)
-      });
-      //console.log(responseJson);
+  useEffect(
+    () => {
+      if (!loaded) {
+        getMagsAction();
+      }
+    },
+    [loaded],
+  );
 
-}
-  render() {
-    const { booksRT, isLoaded } = this.state;
-    //console.log(this.state.booksRT);
-    const { goBack } = this.props.navigation;
-    return (
-    <View style={styles.container}>
-      <ImageBackground source={require('../assets/images/background-image.jpg')} style={{width: '100%', height: '100%', resizeMode: 'cover'}}>
-        <ScrollView
-          style={styles.container}
-          contentContainerStyle={styles.contentContainer}>
-          <View style={styles.welcomeContainer}>
-            <TouchableOpacity onPress={handleLogoPress}>
-              <Image
-                source={
-                  __DEV__
-                    ? require('../assets/images/kt-logo.png')
-                    : require('../assets/images/kt-logo.png')
-                }
-                style={styles.welcomeImage}
-              />
-            </TouchableOpacity>
-            <Text style={styles.pageTitleText}>Revival Times</Text>
-          </View>
-        { isLoaded ? (
+  return (
+    <Screen
+      title="Revival Times"
+    >
+        {
+          booksRT !== undefined
+           ? (
           <View style={{flex: 1, paddingTop: 5, alignItems: 'center'}}>
+
             <FlatList
               style={{width:'100%'}}
-              data={this.state.booksRT}
+              data={booksRT}
               renderItem={({ item }) => {
                 return (
                   <BookItem
@@ -111,13 +87,10 @@ export default class RevivalTimesScreen extends React.Component {
         <View style={{ flex: 1, padding: 20 }}>
           <ActivityIndicator size="large" color="#ffffff"/>
         </View>
-      )}
-
-    </ScrollView>
-  </ImageBackground>
-  </View>
-);
-}
+      )
+    }
+    </Screen>
+  );
 }
 
 RevivalTimesScreen.navigationOptions = {
@@ -262,3 +235,13 @@ const styles = StyleSheet.create({
     marginTop: 1,
   },
 });
+
+export default connect(
+  (state, ownProps) => ({
+    loaded: state.mag.loaded,
+    booksRT: state.mag.data,
+  }),
+  dispatch => ({
+    getMagsAction: () => dispatch(getMags())
+  }),
+)(RevivalTimesScreen)
