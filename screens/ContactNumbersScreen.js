@@ -28,8 +28,7 @@ function ContactNumbersScreen ({
   getContactsAction,
   navigation,
   booksRT,
-  loaded,
-  data
+  loaded
 
 }) {
 
@@ -50,7 +49,7 @@ function ContactNumbersScreen ({
     dovewell_productions,
     it,
     community_link,
-    cells_consolidation } = this.state.data;
+    cells_consolidation } = booksRT;
 
 
   useEffect(
