@@ -15,36 +15,43 @@ import {
   TouchableHighlight,
   ActivityIndicator,
 } from 'react-native';
-//import Touchable from 'react-native-platform-touchable';
 import { Ionicons } from '@expo/vector-icons';
 import { connect } from 'react-redux';
 
-import { getSermons } from '../actions/sermonArchives';
-//import { MonoText } from '../components/StyledText';
-import  BookItem  from '../components/BookItem';
+import { getContacts } from '../actions/contacts';
 import PhoneListItem from '../components/PhoneListItem';
 import Screen from '../components/Screen';
 
 
-//
-// export default class ContactNumbersScreen extends React.Component {
-//   constructor(props) {
-//     super(props);
-//     this.state = {
-//        isLoaded: false,
-//        data: [],
-//      };
-//   }
 
 function ContactNumbersScreen ({
   getContactsAction,
   navigation,
   booksRT,
   loaded,
-  departments,
+  data
+
 }) {
 
   const { goBack } = navigation;
+  const { kt_general_information,
+    senior_ministers_office,
+    lcc_satellite_office,
+    operations,
+    training,
+    prayer_and_visitation,
+    nugen,
+    kids,
+    finance,
+    encounters,
+    baptism,
+    kt_bookshop,
+    revival_times,
+    dovewell_productions,
+    it,
+    community_link,
+    cells_consolidation } = this.state.data;
+
 
   useEffect(
     () => {
@@ -54,28 +61,6 @@ function ContactNumbersScreen ({
     },
     [loaded],
   );
-
-    //const { data, isLoaded} = this.state;
-    const {
-      kt_general_information,
-      senior_ministers_office,
-      lcc_satellite_office,
-      operations,
-      training,
-      prayer_and_visitation,
-      nugen,
-      kids,
-      finance,
-      encounters,
-      baptism,
-      kt_bookshop,
-      revival_times,
-      dovewell_productions,
-      it,
-      community_link,
-      cells_consolidation,
-    } = departments;
-
 
     return (
       <Screen
