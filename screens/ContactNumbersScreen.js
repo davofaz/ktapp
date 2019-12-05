@@ -1,5 +1,5 @@
 import * as WebBrowser from 'expo-web-browser';
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   Image,
   Button,
@@ -15,73 +15,58 @@ import {
   TouchableHighlight,
   ActivityIndicator,
 } from 'react-native';
-import Touchable from 'react-native-platform-touchable';
 import { Ionicons } from '@expo/vector-icons';
-import  BookItem  from '../components/BookItem';
+import { connect } from 'react-redux';
+
+import { getContacts } from '../actions/contacts';
 import PhoneListItem from '../components/PhoneListItem';
 import Screen from '../components/Screen';
 
 
 
-export default class ContactNumbersScreen extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-       isLoaded: false,
-       data: [],
-     };
-  }
+function ContactNumbersScreen ({
+  getContactsAction,
+  navigation,
+  booksRT,
+  loaded
 
-  componentDidMount() {
-    return fetch ('https://www.kt.org/wp-json/wp/v2/pages/23957')
-      .then(response => response.json())
-      .then(responseJson => {
-        //console.log(responseJson)
-        // let filteredResponseJson = responseJson.post_meta_fields.filter(item => item.baptism === "020 8799 6152")
-        // console.log(filteredResponseJson)
-        this.setState(
-          {
-            data: responseJson.post_meta_fields,
-            // data: filteredResponseJson,
-            isLoaded: true
-          },
-          function() {}
-        );
-      })
-      .catch((err) => {
-        console.error(err)
-      });
-  }
+}) {
 
-  render() {
-    const { data, isLoaded} = this.state;
-    const {
-      kt_general_information,
-      senior_ministers_office,
-      lcc_satellite_office,
-      operations,
-      training,
-      prayer_and_visitation,
-      nugen,
-      kids,
-      finance,
-      encounters,
-      baptism,
-      kt_bookshop,
-      revival_times,
-      dovewell_productions,
-      it,
-      community_link,
-      cells_consolidation,
-    } = this.state.data;
+  const { goBack } = navigation;
+  const { kt_general_information,
+    senior_ministers_office,
+    lcc_satellite_office,
+    operations,
+    training,
+    prayer_and_visitation,
+    nugen,
+    kids,
+    finance,
+    encounters,
+    baptism,
+    kt_bookshop,
+    revival_times,
+    dovewell_productions,
+    it,
+    community_link,
+    cells_consolidation } = booksRT;
 
-    const { goBack } = this.props.navigation;
+
+  useEffect(
+    () => {
+      if (!loaded) {
+        getContactsAction();
+      }
+    },
+    [loaded],
+  );
 
     return (
       <Screen
         title="Contact us"
       >
-        { isLoaded ? (
+        { booksRT !== undefined
+           ? (
           <View style={styles.listContainer}>
             <FlatList
               style={{width:'100%'}}
@@ -141,7 +126,6 @@ export default class ContactNumbersScreen extends React.Component {
       </Screen>
     );
   }
-}
 
 
 
@@ -320,3 +304,13 @@ const styles = StyleSheet.create({
     marginTop: 1,
   },
 });
+
+export default connect(
+  (state, ownProps) => ({
+    loaded: state.contact.loaded,
+    booksRT: state.contact.data,
+  }),
+  dispatch => ({
+    getContactsAction: () => dispatch(getContacts())
+  }),
+)(ContactNumbersScreen)
