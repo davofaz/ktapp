@@ -17,7 +17,6 @@ import {
 } from 'react-native';
 import Touchable from 'react-native-platform-touchable';
 import { Ionicons } from '@expo/vector-icons';
-import { MonoText } from '../components/StyledText';
 import  BookItem  from '../components/BookItem';
 import PhoneListItem from '../components/PhoneListItem';
 import Screen from '../components/Screen';
@@ -112,7 +111,7 @@ export default class ContactNumbersScreen extends React.Component {
               }}
               keyExtractor={(item, index) => index.toString()}
             />
-              
+
             <View style={styles.container, {alignSelf: 'center', alignItems: 'center', flexDirection:'row', marginBottom:30}}>
               <TouchableHighlight
                 style={styles.buttonSquare}

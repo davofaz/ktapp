@@ -16,7 +16,6 @@ import {
 } from 'react-native';
 import Touchable from 'react-native-platform-touchable';
 import { Ionicons } from '@expo/vector-icons';
-import { MonoText } from '../components/StyledText';
 
 
 export default class CalendarItem extends React.Component {
