@@ -20,7 +20,6 @@ import { Ionicons } from '@expo/vector-icons';
 import { connect } from 'react-redux';
 
 import { getEvents } from '../actions/whatsOns';
-import { MonoText } from '../components/StyledText';
 import  CalendarItem  from '../components/CalendarItem';
 import Screen from '../components/Screen';
 

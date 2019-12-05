@@ -15,13 +15,11 @@ import {
 } from 'react-native';
 import Touchable from 'react-native-platform-touchable';
 import { Ionicons } from '@expo/vector-icons';
-import { MonoText } from '../components/StyledText';
 
 
 export default class BookItem extends React.Component {
   static propTypes = {
     item: PropTypes.object.isRequired,
-    //key: PropTypes.number
   }
 
   constructor(props) {
@@ -36,7 +34,7 @@ export default class BookItem extends React.Component {
   render()  {
 
     const { title, post_meta_fields, id, jetpack_featured_media_url } = this.props.item;
-    console.log(post_meta_fields)
+    //console.log(post_meta_fields)
 
       return (
         <View>

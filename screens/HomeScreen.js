@@ -26,7 +26,7 @@ function HomeScreen ({
             navigation.navigate('Sermons')
           }}
           underlayColor='rgba(250, 168, 127, 1)'>
-              <Text style={styles.homeLinkText}>Sermon{"\n"}Archive</Text>
+              <Text style={styles.homeLinkText}>Latest{"\n"}Sermons</Text>
         </TouchableHighlight>
         <TouchableHighlight
           style={styles.buttonSquare}
@@ -47,7 +47,7 @@ function HomeScreen ({
         <TouchableHighlight
           style={styles.buttonSquare}
           onPress={() => {
-            onNavChange('Whatson');
+            onNavChange('Revival');
             navigation.navigate('Revival');
           }}
           underlayColor='rgba(250, 168, 127, 1)'>
