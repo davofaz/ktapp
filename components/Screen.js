@@ -19,10 +19,10 @@ export default function Screen({
         <ScrollView
           style={styles.container}
           contentContainerStyle={styles.contentContainer}>
-          <Logo
-            title={title}
-          />
-          {children}
+            <Logo
+              title={title}
+            />
+            {children}
         </ScrollView>
       </ImageBackground>
     </View>
@@ -37,6 +37,7 @@ const styles = StyleSheet.create({
   contentContainer: {
     paddingTop: 50,
     flex: 1,
+    height: '100%'
   },
 });
 

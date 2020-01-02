@@ -1,21 +1,41 @@
 import * as WebBrowser from 'expo-web-browser';
-import React from 'react';
+import React, {useEffect} from 'react';
 import {
   Platform,
   StyleSheet,
   Text,
   TouchableHighlight,
   View,
+  Dimensions
 } from 'react-native';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+  listenOrientationChange as loc,
+  removeOrientationListener as rol
+} from 'react-native-responsive-screen';
 import { connect } from 'react-redux';
-
 import { onNavigationChange } from '../actions/navigation'
 import Screen from '../components/Screen';
+
 
 function HomeScreen ({
   navigation,
   onNavChange,
-}) {
+  loaded,
+})
+
+ {
+   useEffect(
+     () => {
+      if (loaded) {
+        loc()
+      }
+      rol()
+    },
+    [loaded],
+  );
+
   return (
     <Screen>
       <View style={styles.homeLinksContainer}>
@@ -111,13 +131,7 @@ function handlePressDonate() {
 
 
 const styles = StyleSheet.create({
-  developmentModeText: {
-    marginBottom: 20,
-    color: 'rgba(0,0,0,0.4)',
-    fontSize: 14,
-    lineHeight: 19,
-    textAlign: 'center',
-  },
+
   buttonSquare: {
     padding: 15,
     width: 110,
@@ -159,10 +173,10 @@ const styles = StyleSheet.create({
       flexDirection: 'row',
       flexWrap: 'wrap',
       justifyContent: 'center',
-      alignContent: 'stretch',
+      height:200,
+      //alignContent: 'stretch',
       alignItems: 'center',
-      marginTop: '12%'
-
+      marginTop: hp('1%'),
     },
   homeLinkText: {
     top:'50%',
@@ -226,7 +240,7 @@ const styles = StyleSheet.create({
 
 export default connect(
   (state, ownProps) => ({}),
-  dispacth => ({
-    onNavChange: screen => dispacth(onNavigationChange(screen))
+  dispatch => ({
+    onNavChange: screen => dispatch(onNavigationChange(screen))
   }),
 )(HomeScreen)

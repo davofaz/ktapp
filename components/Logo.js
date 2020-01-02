@@ -11,10 +11,10 @@ import * as WebBrowser from 'expo-web-browser';
 
 export default function Logo({
   title,
-}) { 
+}) {
   return (
     <View style={styles.welcomeContainer}>
-      <TouchableOpacity 
+      <TouchableOpacity
         onPress={() => {
           WebBrowser.openBrowserAsync(
             'https://www.kt.org'
@@ -44,8 +44,8 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   welcomeImage: {
-    width: 100,
-    height: 80,
+    width: 70,
+    height: 50,
     resizeMode: 'contain',
     marginTop: 3,
     marginLeft: 0,
