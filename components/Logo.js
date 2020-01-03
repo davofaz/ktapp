@@ -7,11 +7,16 @@ import {
   Image,
   Text,
 } from 'react-native';
+import {useStylesheet} from 'react-native-responsive-ui';
 import * as WebBrowser from 'expo-web-browser';
 
 export default function Logo({
   title,
-}) {
+
+})
+
+ {
+  const styles = useStylesheet(staticStyle)
   return (
     <View style={styles.welcomeContainer}>
       <TouchableOpacity
@@ -37,6 +42,64 @@ Logo.propTypes = {
   title: PropTypes.string,
 };
 
+const staticStyle = [
+  {
+            query: { orientation: "landscape" },
+            style: {
+              welcomeContainer: {
+                alignItems: 'center',
+                marginTop: 10,
+                marginBottom: 20,
+              },
+              welcomeImage: {
+                width: 70,
+                height: 50,
+                resizeMode: 'contain',
+                marginTop: 3,
+                marginLeft: 0,
+              },
+              pageTitleText: {
+                color: '#fff',
+                fontSize: 12,
+                margin: 'auto',
+                paddingTop:20,
+                letterSpacing:3,
+                textAlign: 'center',
+                textTransform: 'uppercase',
+                fontWeight: 'normal',
+              },
+            }
+  },
+  {
+            query: { orientation: "portrait" },
+            style: {
+              welcomeContainer: {
+                alignItems: 'center',
+                marginTop: 10,
+                marginBottom: 20,
+              },
+              welcomeImage: {
+                width: 90,
+                height: 70,
+                resizeMode: 'contain',
+                marginTop: 3,
+                marginLeft: 0,
+              },
+              pageTitleText: {
+                color: '#fff',
+                fontSize: 12,
+                margin: 'auto',
+                paddingTop:20,
+                letterSpacing:3,
+                textAlign: 'center',
+                textTransform: 'uppercase',
+                fontWeight: 'normal',
+              },
+              }
+  }
+];
+
+{/*
 const styles = StyleSheet.create({
   welcomeContainer: {
     alignItems: 'center',
@@ -44,8 +107,8 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   welcomeImage: {
-    width: 70,
-    height: 50,
+    width: 90,
+    height: 70,
     resizeMode: 'contain',
     marginTop: 3,
     marginLeft: 0,
@@ -60,4 +123,4 @@ const styles = StyleSheet.create({
     textTransform: 'uppercase',
     fontWeight: 'normal',
   },
-});
+});*/}
