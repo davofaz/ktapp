@@ -48,15 +48,19 @@ const staticStyle = [
             style: {
               welcomeContainer: {
                 alignItems: 'center',
-                marginTop: 10,
+                marginTop: -20,
                 marginBottom: 20,
+                marginRight: 20,
+                marginLeft: 20,
+                width: '100%',
+                height: 55,
               },
               welcomeImage: {
                 width: 70,
                 height: 50,
                 resizeMode: 'contain',
                 marginTop: 3,
-                marginLeft: 0,
+                marginLeft: -10,
               },
               pageTitleText: {
                 color: '#fff',
