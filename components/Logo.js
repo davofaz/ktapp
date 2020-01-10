@@ -47,12 +47,14 @@ const staticStyle = [
             query: { orientation: "landscape" },
             style: {
               welcomeContainer: {
-                alignItems: 'center',
+                flex:1,
+                flexDirection: 'row',
+                alignItems: 'flex-start',
                 marginTop: -20,
-                marginBottom: 20,
+                marginBottom: 10,
                 marginRight: 20,
                 marginLeft: 20,
-                width: '100%',
+                width: '80%',
                 height: 55,
               },
               welcomeImage: {
@@ -68,7 +70,6 @@ const staticStyle = [
                 margin: 'auto',
                 paddingTop:20,
                 letterSpacing:3,
-                textAlign: 'center',
                 textTransform: 'uppercase',
                 fontWeight: 'normal',
               },
@@ -102,29 +103,3 @@ const staticStyle = [
               }
   }
 ];
-
-{/*
-const styles = StyleSheet.create({
-  welcomeContainer: {
-    alignItems: 'center',
-    marginTop: 10,
-    marginBottom: 20,
-  },
-  welcomeImage: {
-    width: 90,
-    height: 70,
-    resizeMode: 'contain',
-    marginTop: 3,
-    marginLeft: 0,
-  },
-  pageTitleText: {
-    color: '#fff',
-    fontSize: 12,
-    margin: 'auto',
-    paddingTop:20,
-    letterSpacing:3,
-    textAlign: 'center',
-    textTransform: 'uppercase',
-    fontWeight: 'normal',
-  },
-});*/}
