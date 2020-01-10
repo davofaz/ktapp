@@ -167,15 +167,6 @@ const staticStyle = [
               container: {
                 flex: 1,
               },
-
-              codeHighlightText: {
-                color: 'rgba(96,100,109, 0.8)',
-              },
-              codeHighlightContainer: {
-                backgroundColor: 'rgba(0,0,0,0.05)',
-                borderRadius: 3,
-                paddingHorizontal: 4,
-              },
               itemContainer: {
                   flexDirection:'row',
                   height:100,
@@ -240,15 +231,6 @@ const staticStyle = [
             style: {
               container: {
                 flex: 1,
-              },
-
-              codeHighlightText: {
-                color: 'rgba(96,100,109, 0.8)',
-              },
-              codeHighlightContainer: {
-                backgroundColor: 'rgba(0,0,0,0.05)',
-                borderRadius: 3,
-                paddingHorizontal: 4,
               },
               itemContainer: {
                   flexDirection:'row',
