@@ -103,13 +103,6 @@ WhatsOnScreen.navigationOptions = {
 };
 
 
-function handleLogoPress() {
-  WebBrowser.openBrowserAsync(
-
-    'https://www.kt.org'
-  );
-}
-
 function handlePressSeeMoreRT() {
   WebBrowser.openBrowserAsync(
     'https://www.kt.org/events'
