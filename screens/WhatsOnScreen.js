@@ -29,7 +29,6 @@ function WhatsOnScreen ({
   navigation,
   booksRT,
   loaded,
-  //events,
 }) {
 
   useEffect(
@@ -49,7 +48,7 @@ function WhatsOnScreen ({
       title="What's On"
     >
       {
-        booksRT !== null
+        (loaded)
          ? (
         <View style={{flex: 5, paddingTop: 5, alignItems: 'center'}}>
           <FlatList
