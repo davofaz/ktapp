@@ -41,7 +41,7 @@ export default function CalendarItem({
       start_date_details,
       image,
       url,
-      booksRT,
+      //booksRT,
     })
 
      {
