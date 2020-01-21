@@ -46,7 +46,7 @@ function SermonArchiveScreen ({
       title="Latest Sermons"
     >
       {
-        booksRT !== undefined
+        (loaded)
           ? (
           <View style={{flex: 5, paddingTop: 5, alignItems: 'center'}}>
 
