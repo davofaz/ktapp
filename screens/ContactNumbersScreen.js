@@ -67,7 +67,8 @@ function ContactNumbersScreen ({
       <Screen
         title="Contact us"
       >
-        { booksRT !== undefined
+        {
+          (loaded)
            ? (
           <View style={{flex: 5, paddingTop: 5, alignItems: 'center'}}>
             <FlatList
