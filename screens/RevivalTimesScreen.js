@@ -26,7 +26,6 @@ import Screen from '../components/Screen';
 
 function RevivalTimesScreen ({
   getMagsAction,
-  onNavChange,
   navigation,
   booksRT,
   loaded
@@ -49,7 +48,7 @@ function RevivalTimesScreen ({
       title="Revival Times"
     >
         {
-          booksRT !== undefined
+          (loaded)
            ? (
           <View style={{flex:5, paddingTop: 5, alignItems: 'center'}}>
 
