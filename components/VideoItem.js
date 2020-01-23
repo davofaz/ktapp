@@ -95,9 +95,6 @@ export default function VideoItem({
 
         return (
         <View style={styles.container}>
-{/*}        {
-          booksRT != undefined
-           ? (*/}
           <View style={styles.itemContainer}>
             <TouchableHighlight
               style={{width:220, height:150, marginBottom:10}}
@@ -120,27 +117,27 @@ export default function VideoItem({
                 </ImageBackground>
               </View>
              </TouchableHighlight>
-              <View style={styles.container, { /*backgroundColor: 'rgba(196, 196, 196, 0.5)',*/ height:150, width:'100%', flex:1, flexDirection:'column'}}>
+              <View style={styles.metaContainer}>
                 <TouchableHighlight
-                  style={{height:100, width:180}}
+                  style={styles.titleAuthorContainer}
                   onPress={() => WebBrowser.openBrowserAsync(item.post_meta_fields.youtube_url[0])}
                   underlayColor='rgba(250, 168, 127, 0.7)'>
-                  <View style={{display:'flex', flexDirection:'column'}}>
+                  <View style={{flexGrow:5, flexDirection:'column'}}>
                     <Text style={styles.titleText}>{item.title.rendered}</Text>
                     <Text style={styles.authorText}>{item.name}</Text>
                   </View>
                 </TouchableHighlight>
                 <TouchableHighlight
-                  style={{height:50, width:180}}
+                  style={{height:40, width:'100%'}}
                   onPress={() => WebBrowser.openBrowserAsync(item.post_meta_fields.podcast_file[0])}
                   underlayColor='rgba(250, 168, 127, 0.7)'>
-                  <View style={{display:'flex', height:50, flexDirection:'row'}}>
-                    <Text style={styles.audioText}>Audio Only</Text>
+                  <View style={{flexGrow:1, height:50, flexDirection:'row'}}>
+                    <Text style={styles.audioText}>MP3</Text>
                     <Ionicons
                       style={{color:'#ffffff', marginLeft:20, marginTop:10}}
                       size={18}
                       name={Platform.OS === 'ios'
-                      ? 'ios-download' : 'md-download'}/>
+                      ? 'ios-musical-note' : 'md-musical-note'}/>
                     </View>
                 </TouchableHighlight>
               </View>
@@ -148,17 +145,6 @@ export default function VideoItem({
         </View>
           )
         }
-
-{/*               ) : (
-             <View style={{ flex: 1, padding: 20 }}>
-               <ActivityIndicator size="large" color="#ffffff"/>
-              </View>
-           )}
-        </View>
-
-        */}
-
-// }; //end of class
 
 const staticStyle = [
   {
@@ -182,13 +168,23 @@ const staticStyle = [
                 width:220,
                 height:100
               },
+              metaContainer: {
+                //height:50,
+                width:'100%',
+                flex:1,
+                flexDirection:'column'
+              },
+              titleAuthorContainer: {
+                //height:40,
+                flex:1,
+                width:'100%',
+              },
               iconContainer: {
                 width:220,
                 height: 100,
                 marginTop: 0,
                 justifyContent:'center',
                 alignItems:'center',
-
               },
               playIcon: {
                 color:'rgba(255, 255, 255, 0.60)',
@@ -212,8 +208,8 @@ const staticStyle = [
                 textTransform: 'uppercase',
                 fontWeight: 'normal',
                 width:130,
-                borderBottomColor: 'rgba(255, 255, 255, 0.5)',
-                borderBottomWidth:1,
+                //borderBottomColor: 'rgba(255, 255, 255, 0.5)',
+                //borderBottomWidth:1,
               },
               audioText: {
                 color: '#fff',
@@ -248,6 +244,16 @@ const staticStyle = [
                 height:150,
                 marginTop: 0,
               },
+              metaContainer: {
+                height:150,
+                width:'100%',
+                flex:1,
+                flexDirection:'column'
+              },
+              titleAuthorContainer: {
+                //height:150,
+                width:'100%',
+              },
               iconContainer: {
                 width:220,
                 height: 150,
@@ -262,7 +268,7 @@ const staticStyle = [
                },
               titleText: {
                 color: '#fff',
-                fontSize: 11,
+                fontSize: 14,
                 marginLeft:10,
                 marginTop:10,
                 textTransform: 'uppercase',
@@ -278,8 +284,8 @@ const staticStyle = [
                 textTransform: 'uppercase',
                 fontWeight: 'normal',
                 width:130,
-                borderBottomColor: 'rgba(255, 255, 255, 0.5)',
-                borderBottomWidth:1,
+                //borderBottomColor: 'rgba(255, 255, 255, 0.5)',
+                //borderBottomWidth:1,
               },
               audioText: {
                 color: '#fff',
