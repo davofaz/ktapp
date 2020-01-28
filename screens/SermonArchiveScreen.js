@@ -227,6 +227,6 @@ export default connect(
     booksRT: state.sermon.data,
   }),
   dispatch => ({
-    getSermonsAction: () => dispatch(getSermons())
+    getSermonsAction: () => dispatch(getSermons()),
   }),
 )(SermonArchiveScreen)

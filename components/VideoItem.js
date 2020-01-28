@@ -1,6 +1,6 @@
 import * as WebBrowser from 'expo-web-browser';
 import PropTypes from 'prop-types';
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   Image,
   Button,
@@ -17,6 +17,8 @@ import {
 import {useStylesheet} from 'react-native-responsive-ui';
 import Touchable from 'react-native-platform-touchable';
 import { Ionicons } from '@expo/vector-icons';
+//import { connect } from 'react-redux';
+//import { getAuthor } from '../actions/authors';
 
 
 // export default class VideoItem extends React.Component {
@@ -53,44 +55,59 @@ import { Ionicons } from '@expo/vector-icons';
 //   }
 //
 //   render()  {
-export default function VideoItem({
+function VideoItem({
   item,
   title,
   post_meta_fields,
-  id, jetpack_featured_media_url,
-  booksRT,
+  id,
+  jetpack_featured_media_url,
+  //booksRT,
+  //name,
+//getAuthorAction,
+  //loaded,
+  author,
 })
 
  {
 
    // useEffect(
    //   () => {
-   //
-   //     const authorId = booksRT.item.author;
-   //
-   //         return fetch (`https://www.kt.org/wp-json/wp/v2/users/${authorId}`)
-   //           .then(response => response.json())
-   //           .then(responseJson => {
-   //             this.setState(
-   //               {
-   //                 author: responseJson,
-   //                 isLoaded: true
-   //               },
-   //               function() {}
-   //             );
-   //             //console.log(this.state.author);
-   //           })
-   //           .catch((err) => {
-   //             console.error(err)
-   //           });
-   //
+   //     if (!loaded) {
+   //       getAuthorAction();
+   //     }
    //   },
-   //   [],
+   //   [loaded],
    // );
 
+   useEffect(
+     () => {
+
+       const authorId = item.author;
+
+           return fetch (`https://www.kt.org/wp-json/wp/v2/users/${authorId}`)
+             .then(response => response.json())
+             .then(responseJson => {
+               useState(
+                 {
+                   author: responseJson,
+                   //isLoaded: true
+                 },
+                 function() {}
+               );
+               //console.log(this.state.author);
+             })
+             .catch((err) => {
+               console.error(err)
+             });
+
+     },
+     [],
+   );
+
     const styles = useStylesheet(staticStyle)
+    //const authorId = item.author;
     //const { title, post_meta_fields, id, jetpack_featured_media_url } = this.props.item;
-    //const name = booksRT.author.name;
+    const name = useState(name);
     //const isLoaded = booksRT.state.isLoaded;
 
         return (
@@ -304,6 +321,7 @@ VideoItem.propTypes = {
      item: PropTypes.object.isRequired,
  }
 
+
 // const styles = StyleSheet.create({
 //     container: {
 //       flex: 1,
@@ -361,3 +379,13 @@ VideoItem.propTypes = {
 //       fontWeight: 'normal',
 //     },
 // });
+
+// export default connect(
+//   (state, ownProps) => ({
+//     //loaded: state.author.loaded,
+//     author: state.sermon.author,
+//   }),
+//   dispatch => ({
+//     getAuthorAction: () => dispatch(getAuthor()),
+//   }),
+// )(VideoItem)
