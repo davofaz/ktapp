@@ -7,7 +7,7 @@ import {
   Image,
   Text,
 } from 'react-native';
-import {useStylesheet} from 'react-native-responsive-ui';
+import { useStylesheet } from 'react-native-responsive-ui';
 import * as WebBrowser from 'expo-web-browser';
 
 export default function Logo({

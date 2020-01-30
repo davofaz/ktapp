@@ -14,7 +14,7 @@ import {
   TouchableHighlight,
   ActivityIndicator,
 } from 'react-native';
-import {useStylesheet} from 'react-native-responsive-ui';
+import { useStylesheet } from "react-native-responsive-ui";
 import Touchable from 'react-native-platform-touchable';
 import { Ionicons } from '@expo/vector-icons';
 

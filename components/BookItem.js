@@ -14,7 +14,7 @@ import {
   TouchableHighlight,
   Dimensions,
 } from 'react-native';
-import {useStylesheet} from 'react-native-responsive-ui';
+import { useStylesheet } from "react-native-responsive-ui";
 import { Ionicons } from '@expo/vector-icons';
 
 

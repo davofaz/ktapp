@@ -14,7 +14,7 @@ import {
   TouchableHighlight,
   Linking,
 } from 'react-native';
-import {useStylesheet} from 'react-native-responsive-ui';
+import { useStylesheet } from 'react-native-responsive-ui';
 import { Ionicons } from '@expo/vector-icons';
 
 export default function PhoneListItem({
