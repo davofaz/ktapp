@@ -14,34 +14,16 @@ import {
   TouchableHighlight,
   ActivityIndicator,
 } from 'react-native';
-import useStylesheet from 'react-native-responsive-ui';
+import {useStylesheet} from 'react-native-responsive-ui';
 import Touchable from 'react-native-platform-touchable';
 import { Ionicons } from '@expo/vector-icons';
 
 
-// export default class CalendarItem extends React.Component {
-//   static propTypes = {
-//     item: PropTypes.object.isRequired,
-//   }
-//
-//   constructor(props) {
-//     super(props);
-//     this.state={
-//       //pdfUrl: '',
-//       isLoaded: true,
-//     }
-//   }
-//
-//   render()  {
-
-    // const { title, start_date_details, image, url, } = this.props.item;
-    // const isLoaded = this.state.isLoaded;
 export default function CalendarItem({
       item,
       start_date_details,
       image,
       url,
-      //booksRT,
     })
 
      {
