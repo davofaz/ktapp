@@ -33,7 +33,7 @@ export default function CalendarItem({
           <View style={styles.itemContainer}>
             <TouchableHighlight
               style={{height:100, marginBottom:10}}
-              onPress={() => WebBrowser.openBrowserAsync(url)}
+              onPress={() => WebBrowser.openBrowserAsync(item.url)}
               underlayColor='rgba(250, 168, 127, 0.7)'>
               <View style={{display:'flex', flexDirection:'row'}}>
                 <Image
