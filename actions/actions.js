@@ -15,3 +15,7 @@ export const GET_MAGS_ERROR = 'getMagsError';
 export const GET_CONTACTS = 'getContacts';
 export const GET_CONTACTS_SUCCESS = 'getContactsSuccess';
 export const GET_CONTACTS_ERROR = 'getContactsError';
+
+export const GET_AUTHOR = 'getAuthor';
+export const GET_AUTHOR_SUCCESS = 'getAuthorSuccess';
+export const GET_AUTHOR_ERROR = 'getAuthorError';
