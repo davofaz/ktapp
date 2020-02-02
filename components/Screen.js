@@ -12,6 +12,7 @@ import Logo from './Logo';
 export default function Screen({
   title,
   children,
+  buttons,
 }) {
   return (
     <View style={styles.container}>
@@ -24,6 +25,23 @@ export default function Screen({
             />
             {children}
         </ScrollView>
+        <View style={styles.bottomNav}>
+          {buttons}
+          <TouchableHighlight
+              style={styles.buttonSquare}
+              onPress={() => goBack()}
+              title="Go back"
+              underlayColor='rgba(250, 168, 127, 1)'>
+              <View style={styles.backButton}>
+                <Ionicons
+                  style={styles.arrowIcon}
+                  size={32}
+                  name={Platform.OS === 'ios'
+                  ? 'ios-arrow-back' : 'md-arrow-back'}/>
+                <Text style={styles.buttonText}>Go Back</Text>
+              </View>
+            </TouchableHighlight>
+          </View>
       </ImageBackground>
     </View>
   );

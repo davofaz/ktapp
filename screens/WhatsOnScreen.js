@@ -46,6 +46,16 @@ function WhatsOnScreen ({
   return (
     <Screen
       title="What's On"
+      buttons={[
+        <TouchableHighlight
+          style={styles.buttonSquare}
+          onPress={handlePressSeeMoreRT}
+          underlayColor='rgba(250, 168, 127, 1)'>
+            <View style={styles.container, {alignItems: 'center', flexDirection:'row'}}>
+              <Text style={styles.buttonText}>See more on our website</Text>
+            </View>
+        </TouchableHighlight>
+      ]}
     >
       {
         (loaded)
@@ -63,30 +73,6 @@ function WhatsOnScreen ({
             }}
             keyExtractor={(item, index) => index.toString()}
           />
-          <View style={styles.bottomNav}>
-            <TouchableHighlight
-              style={styles.buttonSquare}
-              onPress={handlePressSeeMoreRT}
-              underlayColor='rgba(250, 168, 127, 1)'>
-                <View style={styles.container, {alignItems: 'center', flexDirection:'row'}}>
-                  <Text style={styles.buttonText}>See more on our website</Text>
-                </View>
-            </TouchableHighlight>
-            <TouchableHighlight
-                style={styles.buttonSquare}
-                onPress={() => goBack()}
-                title="Go back"
-                underlayColor='rgba(250, 168, 127, 1)'>
-                <View style={styles.backButton}>
-                  <Ionicons
-                    style={styles.arrowIcon}
-                    size={32}
-                    name={Platform.OS === 'ios'
-                    ? 'ios-arrow-back' : 'md-arrow-back'}/>
-                  <Text style={styles.buttonText}>Go Back</Text>
-                </View>
-              </TouchableHighlight>
-            </View>
           </View>
         ) : (
         <View style={{ flex: 1, padding: 20 }}>
