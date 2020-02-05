@@ -1,34 +1,23 @@
 import * as WebBrowser from 'expo-web-browser';
 import React, { useEffect } from 'react';
 import {
-  Image,
-  Button,
-  Platform,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
   View,
-  ImageBackground,
-  WebView,
   FlatList,
-  TouchableHighlight,
   ActivityIndicator,
 } from 'react-native';
 import {useStylesheet} from 'react-native-responsive-ui';
-import { Ionicons } from '@expo/vector-icons';
 import { connect } from 'react-redux';
-
 import { getMags } from '../actions/rTs';
 import  BookItem  from '../components/BookItem';
 import Screen from '../components/Screen';
+import BottomNav from '../components/BottomNav';
 
 
 function RevivalTimesScreen ({
   getMagsAction,
-  navigation,
   booksRT,
-  loaded
+  loaded,
+  seeMoreURL
 }) {
 
   useEffect(
@@ -40,7 +29,6 @@ function RevivalTimesScreen ({
     [loaded]
   );
 
-  const { goBack } = navigation;
   const styles = useStylesheet(staticStyle)
 
   return (
@@ -50,10 +38,9 @@ function RevivalTimesScreen ({
         {
           (loaded)
            ? (
-          <View style={{flex:5, paddingTop: 5, alignItems: 'center'}}>
-
+          <View style={styles.mainContainer}>
             <FlatList
-              style={{width:'100%',flex:3}}
+              style={styles.flatList}
               data={booksRT}
               renderItem={({ item }) => {
                 return (
@@ -64,33 +51,12 @@ function RevivalTimesScreen ({
               }}
               keyExtractor={(item, index) => index.toString()}
             />
-            <View style={styles.bottomNav}>
-            <TouchableHighlight
-              style={styles.buttonSquare}
-              onPress={handlePressSeeMoreRT}
-              underlayColor='rgba(250, 168, 127, 1)'>
-                <View style={styles.container, {alignItems: 'center', flexDirection:'row'}}>
-                  <Text style={styles.buttonText}>See more on our website</Text>
-                </View>
-            </TouchableHighlight>
-            <TouchableHighlight
-                style={styles.buttonSquare}
-                onPress={() => goBack()}
-                title="Go back"
-                underlayColor='rgba(250, 168, 127, 1)'>
-                <View style={styles.backButton}>
-                  <Ionicons
-                    style={styles.arrowIcon}
-                    size={32}
-                    name={Platform.OS === 'ios'
-                    ? 'ios-arrow-back' : 'md-arrow-back'}/>
-                  <Text style={styles.buttonText}>Go Back</Text>
-                </View>
-              </TouchableHighlight>
-            </View>
+            <BottomNav
+              seeMoreURL="https://www.kt.org/revivaltimes/"
+            />
           </View>
         ) : (
-         <View style={{ flex: 1, padding: 20 }}>
+         <View style={styles.activityContainer}>
           <ActivityIndicator size="large" color="#ffffff"/>
          </View>
       )
@@ -103,127 +69,51 @@ RevivalTimesScreen.navigationOptions = {
   header: null,
 };
 
-function handleLogoPress() {
-  WebBrowser.openBrowserAsync(
+const screenStyles = {
+  mainContainer: {
+    flex: 5,
+    alignItems: 'center'
+  },
+  activityContainer: {
+    flex: 1,
+    padding: 20
+  },
+  flatList: {
+    width:'100%'
+  }
 
-    'https://www.kt.org'
-  );
-}
-
-function handlePressSeeMoreRT() {
-  WebBrowser.openBrowserAsync(
-    'https://www.kt.org/revivaltimes'
-  );
 }
 
 const staticStyle = [
   {
             query: { orientation: "landscape" },
             style: {
-              container: {
-                flex:1,
+              mainContainer: {
+                ...screenStyles.mainContainer,
               },
-              arrowIcon: {
-                color:'#fff',
-                margin:20,
-                marginLeft:50,
+              activityContainer: {
+                ...screenStyles.activityContainer,
               },
-              buttonSquare: {
-                padding: 0,
-                width: 240,
-                height: 60,
-                borderRadius: 10,
-                borderWidth:1,
-                borderColor: '#fff',
-                opacity: 80,
-                flexDirection: 'row',
-                backgroundColor: 'rgba(137, 167, 165, 1)',
-                marginTop: 20,
-                marginRight: 10,
-                marginLeft: 25,
-                justifyContent:'center',
-                alignContent: 'center',
-                shadowColor: 'rgba(0,0,0, .6)', // IOS
-                shadowOffset: { height: 1, width: 1 }, // IOS
-                shadowOpacity: 1, // IOS
-                shadowRadius: 1, //IOS
-                elevation: 6, // Android
-                },
-                bottomNav: {
-                alignItems: 'center',
-                flexDirection:'row',
-                marginBottom:10,
-                },
-                backButton: {
-                  flex:1,
-                  alignItems: 'center',
-                  flexDirection:'row',
-                },
-              buttonText: {
-                color: '#fff',
-                fontSize: 14,
-                textAlign: 'center',
-                textTransform: 'uppercase',
-                fontWeight: 'bold',
+              flatList: {
+                ...screenStyles.flatList,
               }
             }
   },
   {
             query: { orientation: "portrait" },
             style: {
-              container: {
-                flex:1,
+              mainContainer: {
+                ...screenStyles.mainContainer,
               },
-              arrowIcon: {
-                color:'#fff',
-                marginTop:15,
-
+              activityContainer: {
+                ...screenStyles.activityContainer,
               },
-              buttonSquare: {
-                padding: 15,
-                width: 110,
-                height: 110,
-                borderRadius: 10,
-                borderWidth:1,
-                borderColor: '#fff',
-                opacity: 80,
-                flexDirection: 'row',
-                backgroundColor: 'rgba(137, 167, 165, 1)',
-                marginTop: 35,
-                marginRight: 10,
-                marginLeft: 25,
-                justifyContent:'center',
-                alignContent: 'center',
-                shadowColor: 'rgba(0,0,0, .6)', // IOS
-                shadowOffset: { height: 1, width: 1 }, // IOS
-                shadowOpacity: 1, // IOS
-                shadowRadius: 1, //IOS
-                elevation: 6, // Android
-                },
-              bottomNav: {
-                width: '80%',
-                alignItems: 'center',
-                alignSelf: 'center',
-                flexDirection:'row',
-                marginBottom:10,
-                },
-              backButton: {
-                flex:1,
-                alignItems: 'center',
-                flexDirection:'column',
-              },
-              buttonText: {
-                color: '#fff',
-                fontSize: 14,
-                width: 80,
-                textAlign: 'center',
-                textTransform: 'uppercase',
-                fontWeight: 'bold',
+              flatList: {
+                ...screenStyles.flatList,
               }
             }
   }
 ];
-
 
 export default connect(
   (state, ownProps) => ({
