@@ -4,7 +4,7 @@ import {
   View,
   Platform,
   Text,
-  TouchableHighlight,
+  TouchableHighlight
 } from 'react-native';
 import { useStylesheet } from 'react-native-responsive-ui';
 import { Ionicons } from '@expo/vector-icons';
@@ -13,7 +13,7 @@ import { withNavigation } from 'react-navigation';
 
 function BottomNav({
   seeMoreURL,
-  navigation,
+  navigation
 }) {
 
   const { goBack }  = navigation;
@@ -51,13 +51,47 @@ function BottomNav({
 }
 
 BottomNav.propTypes = {
-  seeMoreURL: PropTypes.string,
+  seeMoreURL: PropTypes.string
 };
 
 const buttonNavStyles = {
   buttonTextContainer: {
-    marginLeft: 25
-  }
+    flex:1,
+    alignItems: 'center'
+  },
+  arrowIcon: {
+    color:'#fff'
+  },
+  buttonSquare: {
+    borderRadius: 10,
+    borderWidth:1,
+    borderColor: '#fff',
+    opacity: 80,
+    flexDirection: 'row',
+    backgroundColor: 'rgba(137, 167, 165, 1)',
+    marginRight: 10,
+    marginLeft: 25,
+    justifyContent:'center',
+    alignContent: 'center',
+    shadowColor: 'rgba(0,0,0, .6)', // IOS
+    shadowOffset: { height: 1, width: 1 }, // IOS
+    shadowOpacity: 1, // IOS
+    shadowRadius: 1, //IOS
+    elevation: 6 // Android
+  },
+  bottomNav: {
+    alignItems: 'center',
+    flexDirection:'row',
+    marginBottom:20,
+    marginTop:0
+  },
+  buttonText: {
+    color: '#fff',
+    fontSize: 14,
+    textAlign: 'center',
+    textTransform: 'uppercase',
+    fontWeight: 'bold'
+    }
 }
 
 const staticStyle = [
@@ -66,108 +100,61 @@ const staticStyle = [
             style: {
               buttonTextContainer: {
                 ...buttonNavStyles.buttonTextContainer,
-                flex:1,
-                alignItems: 'center',
-                flexDirection:'row',
+                marginLeft: 25,
+                flexDirection:'row'
               },
               arrowIcon: {
-                color:'#fff',
+                ...buttonNavStyles.arrowIcon,
                 margin:20,
-                marginLeft:40,
+                marginLeft:40
               },
               buttonSquare: {
+                ...buttonNavStyles.buttonSquare,
                 padding: 0,
                 width: 240,
                 height: 60,
-                borderRadius: 10,
-                borderWidth:1,
-                borderColor: '#fff',
-                opacity: 80,
-                flexDirection: 'row',
-                backgroundColor: 'rgba(137, 167, 165, 1)',
-                marginTop: 20,
-                marginRight: 10,
-                marginLeft: 25,
-                justifyContent:'center',
-                alignContent: 'center',
-                shadowColor: 'rgba(0,0,0, .6)', // IOS
-                shadowOffset: { height: 1, width: 1 }, // IOS
-                shadowOpacity: 1, // IOS
-                shadowRadius: 1, //IOS
-                elevation: 6, // Android
+                marginTop: 20
                 },
-                bottomNav: {
-                alignItems: 'center',
-                flexDirection:'row',
-                marginBottom:20,
-                marginTop:0,
+              bottomNav: {
+                ...buttonNavStyles.bottomNav,
+                marginTop:0
                 },
-                buttonText: {
-                  color: '#fff',
-                  fontSize: 14,
-                  textAlign: 'center',
-                  textTransform: 'uppercase',
-                  fontWeight: 'bold',
-                  },
+              buttonText: {
+                ...buttonNavStyles.buttonText
               }
+            }
   },
   {
             query: { orientation: "portrait" },
             style: {
               buttonTextContainer: {
-                flex:1,
-                alignItems: 'center',
-                flexDirection:'column',
+                ...buttonNavStyles.buttonTextContainer,
+                flexDirection:'column'
               },
               arrowIcon: {
-                color:'#fff',
+                ...buttonNavStyles.arrowIcon,
                 marginTop:10,
-                marginBottom:-10,
+                marginBottom:-10
 
               },
               buttonSquare: {
+                ...buttonNavStyles.buttonSquare,
                 padding: 15,
                 width: 110,
                 height: 110,
-                borderRadius: 10,
-                borderWidth:1,
-                borderColor: '#fff',
-                opacity: 80,
-                flexDirection: 'row',
-                backgroundColor: 'rgba(137, 167, 165, 1)',
-                marginTop: 35,
-                marginRight: 10,
-                marginLeft: 25,
-                justifyContent:'center',
-                alignContent: 'center',
-                shadowColor: 'rgba(0,0,0, .6)', // IOS
-                shadowOffset: { height: 1, width: 1 }, // IOS
-                shadowOpacity: 1, // IOS
-                shadowRadius: 1, //IOS
-                elevation: 6, // Android
-                },
+                marginTop: 35
+              },
               bottomNav: {
+                ...buttonNavStyles.bottomNav,
                 width: '80%',
-                alignItems: 'center',
                 alignSelf: 'center',
-                flexDirection:'row',
-                marginBottom:20,
-                marginTop:-10,
-                },
-              backButton: {
-                flex:1,
-                alignItems: 'center',
-                flexDirection:'column',
+                marginTop:-10
               },
               buttonText: {
-                color: '#fff',
-                fontSize: 14,
+                ...buttonNavStyles.buttonText,
                 width: 80,
-                marginTop:15,
-                textAlign: 'center',
-                textTransform: 'uppercase',
-                fontWeight: 'bold',
-              },
+                marginTop:15
+              }
             }
   }
 ];
