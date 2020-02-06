@@ -38,7 +38,7 @@ export default function CalendarItem({
               <View style={{display:'flex', flexDirection:'row'}}>
                 <Image
                   style={styles.calendarImage}
-                  source={{uri: item.image.sizes.medium.url}}
+                  source={{uri: item.image.url}}
                   />
                 <View style={styles.textContainer}>
                   <Text style={styles.eventTitleText}>{item.title}</Text>
