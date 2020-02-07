@@ -53,7 +53,7 @@ export default function VideoItem({
               style={styles.imageTouchable}
               onPress={() => WebBrowser.openBrowserAsync(item.post_meta_fields.youtube_url[0])}
               underlayColor='rgba(250, 168, 127, 0.9)'>
-              <View style={{display:'flex', flexDirection:'row'}}>
+              <View style={styles.container}>
                 <ImageBackground
                   style={styles.sermonImage}
                   source={{uri: item.jetpack_featured_media_url}}
@@ -75,19 +75,19 @@ export default function VideoItem({
                   style={styles.titleAuthorContainer}
                   onPress={() => WebBrowser.openBrowserAsync(item.post_meta_fields.youtube_url[0])}
                   underlayColor='rgba(250, 168, 127, 0.7)'>
-                  <View style={{flexGrow:5, flexDirection:'column'}}>
+                  <View style={styles.container}>
                     <Text style={styles.titleText}>{item.title.rendered}</Text>
                     <Text style={styles.authorText}>{author.name}</Text>
                   </View>
                 </TouchableHighlight>
                 <TouchableHighlight
-                  style={{height:40, width:'100%'}}
+                  style={styles.audioContainer}
                   onPress={() => WebBrowser.openBrowserAsync(item.post_meta_fields.podcast_file[0])}
                   underlayColor='rgba(250, 168, 127, 0.7)'>
-                  <View style={{flexGrow:1, height:50, flexDirection:'row'}}>
+                  <View style={styles.audioTextContainer}>
                     <Text style={styles.audioText}>MP3</Text>
                     <Ionicons
-                      style={{color:'#ffffff', marginLeft:20, marginTop:10}}
+                      style={styles.audioIcon}
                       size={18}
                       name={Platform.OS === 'ios'
                       ? 'ios-musical-note' : 'md-musical-note'}/>
@@ -97,7 +97,7 @@ export default function VideoItem({
           </View>
         </View>
       ) : (
-          <View style={{ flex: 1, padding: 20 }}>
+          <View style={styles.activityContainer}>
             <ActivityIndicator size="large" color="#ffffff"/>
           </View>
         )
@@ -158,6 +158,15 @@ const itemStyles = {
     fontWeight: 'normal',
     width:130,
   },
+  audioContainer: {
+    height:40,
+    width:'100%'
+  },
+  audioTextContainer: {
+    flexGrow:1,
+    height:50,
+    flexDirection:'row'
+  },
   audioText: {
     color: '#fff',
     fontSize: 11,
@@ -166,6 +175,15 @@ const itemStyles = {
     paddingBottom: 5,
     textTransform: 'uppercase',
     fontWeight: 'normal',
+  },
+  audioIcon: {
+    color:'#ffffff',
+    marginLeft:20,
+    marginTop:10
+  },
+  activityContainer: {
+    flex: 1,
+    padding: 20
   },
 }
 
@@ -208,8 +226,20 @@ const staticStyle = [
               authorText: {
                 ...itemStyles.authorText
               },
+              audioContainer: {
+                ...itemStyles.audioContainer
+              },
+              audioTextContainer: {
+                ...itemStyles.audioTextContainer
+              },
               audioText: {
                 ...itemStyles.audioText
+              },
+              audioIcon: {
+                ...itemStyles.audioIcon
+              },
+              activityContainer: {
+                ...itemStyles.activityContainer
               }
             }
   },
@@ -255,8 +285,20 @@ const staticStyle = [
               authorText: {
                 ...itemStyles.authorText
               },
+              audioContainer: {
+                ...itemStyles.audioContainer
+              },
+              audioTextContainer: {
+                ...itemStyles.audioTextContainer
+              },
               audioText: {
                 ...itemStyles.audioText
+              },
+              audioIcon: {
+                ...itemStyles.audioIcon
+              },
+              activityContainer: {
+                ...itemStyles.activityContainer
               }
             }
   }
