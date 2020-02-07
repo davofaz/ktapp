@@ -2,20 +2,14 @@ import * as WebBrowser from 'expo-web-browser';
 import PropTypes from 'prop-types';
 import React, {useEffect, useState} from 'react';
 import {
-  Image,
-  Button,
-  Platform,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
   View,
+  Platform,
+  Text,
   ImageBackground,
   TouchableHighlight,
   ActivityIndicator,
 } from 'react-native';
 import { useStylesheet } from "react-native-responsive-ui";
-//import Touchable from 'react-native-platform-touchable';
 import { Ionicons } from '@expo/vector-icons';
 
 
@@ -111,99 +105,121 @@ export default function VideoItem({
   );
 }
 
+const itemStyles = {
+  container: {
+    flex: 1,
+  },
+  itemContainer: {
+    flexDirection:'row',
+    height:100,
+    marginBottom:10,
+    backgroundColor: 'rgba(137, 167, 165, 1)',
+    shadowColor: 'rgba(0,0,0, 1)', // IOS
+    shadowOffset: { height: 2, width: 0 }, // IOS
+    shadowOpacity: 1, // IOS
+    shadowRadius: 1, //IOS
+    elevation: 6, // Android
+  },
+  imageTouchable: {
+    marginBottom:10
+  },
+  metaContainer: {
+    width:'100%',
+    flex:1,
+    flexDirection:'column'
+  },
+  titleAuthorContainer: {
+    flex:1,
+  },
+  iconContainer: {
+    marginTop: 0,
+    justifyContent:'center',
+    alignItems:'center',
+  },
+  playIcon: {
+    color:'rgba(255, 255, 255, 0.60)',
+    flex:1,
+    width:100,
+  },
+  titleText: {
+    color: '#fff',
+    marginLeft:10,
+    marginTop:10,
+    textTransform: 'uppercase',
+    fontWeight: 'bold',
+  },
+  authorText: {
+    color: '#fff',
+    fontSize: 11,
+    marginLeft:10,
+    marginTop:10,
+    paddingBottom: 5,
+    textTransform: 'uppercase',
+    fontWeight: 'normal',
+    width:130,
+  },
+  audioText: {
+    color: '#fff',
+    fontSize: 11,
+    marginLeft:10,
+    marginTop:10,
+    paddingBottom: 5,
+    textTransform: 'uppercase',
+    fontWeight: 'normal',
+  },
+}
+
 const staticStyle = [
   {
             query: { orientation: "landscape" },
             style: {
-              container: {
-                flex: 1,
-              },
+              ...itemStyles.container,
               itemContainer: {
-                flexDirection:'row',
+                ...itemStyles.itemContainer,
                 height:100,
-                marginBottom:10,
-                backgroundColor: 'rgba(137, 167, 165, 1)',
-                shadowColor: 'rgba(0,0,0, 1)', // IOS
-                shadowOffset: { height: 2, width: 0 }, // IOS
-                shadowOpacity: 1, // IOS
-                shadowRadius: 1, //IOS
-                elevation: 6, // Android
               },
               sermonImage: {
                 width:220,
                 height:100
               },
               imageTouchable: {
+                ...itemStyles.imageTouchable,
                 width:220,
                 height:100,
-                marginBottom:10
               },
               metaContainer: {
-                width:'100%',
-                flex:1,
-                flexDirection:'column'
+                ...itemStyles.metaContainer,
               },
               titleAuthorContainer: {
-                flex:1,
-                width:'100%',
+                ...itemStyles.titleAuthorContainer,
               },
               iconContainer: {
+                ...itemStyles.iconContainer,
                 width:220,
-                height: 100,
-                marginTop: 0,
-                justifyContent:'center',
-                alignItems:'center',
+                height: 100
               },
               playIcon: {
-                color:'rgba(255, 255, 255, 0.60)',
-                flex:1,
-                width:100,
+                ...itemStyles.playIcon,
                },
               titleText: {
-                color: '#fff',
+                ...itemStyles.titleText,
                 fontSize: 18,
-                marginLeft:10,
-                marginTop:10,
-                textTransform: 'uppercase',
-                fontWeight: 'bold',
               },
               authorText: {
-                color: '#fff',
-                fontSize: 11,
-                marginLeft:10,
-                marginTop:10,
-                paddingBottom: 5,
-                textTransform: 'uppercase',
-                fontWeight: 'normal',
-                width:130,
+                ...itemStyles.authorText
               },
               audioText: {
-                color: '#fff',
-                fontSize: 11,
-                marginLeft:10,
-                marginTop:10,
-                paddingBottom: 5,
-                textTransform: 'uppercase',
-                fontWeight: 'normal',
-              },
+                ...itemStyles.audioText
+              }
             }
   },
   {
             query: { orientation: "portrait" },
             style: {
-              container: {
-                flex: 1,
-              },
+              ...itemStyles.container,
               itemContainer: {
-                flexDirection:'row',
+                ...itemStyles.itemContainer,
                 height:130,
-                marginBottom:10,
-                backgroundColor: 'rgba(137, 167, 165, 1)',
-                shadowColor: 'rgba(0,0,0, 1)', // IOS
-                shadowOffset: { height: 2, width: 0 }, // IOS
-                shadowOpacity: 1, // IOS
-                shadowRadius: 1, //IOS
-                elevation: 6, // Android
               },
               sermonImage: {
                 width:200,
@@ -211,59 +227,37 @@ const staticStyle = [
                 marginTop: 0,
               },
               imageTouchable: {
+                ...itemStyles.imageTouchable,
                 width:200,
                 height:130,
-                marginBottom:10
               },
               metaContainer: {
+                ...itemStyles.metaContainer,
                 height:130,
-                width:'100%',
-                flex:1,
-                flexDirection:'column'
               },
               titleAuthorContainer: {
+                ...itemStyles.titleAuthorContainer,
                 width:'100%',
               },
               iconContainer: {
+                ...itemStyles.iconContainer,
                 width:200,
-                height: 130,
-                justifyContent:'center',
-                alignItems:'center',
-                marginTop:0,
+                height: 130
               },
               playIcon: {
-                color:'rgba(255, 255, 255, 0.60)',
-                flex:1,
-                width:100,
+                ...itemStyles.playIcon,
                },
               titleText: {
-                color: '#fff',
+                ...itemStyles.titleText,
                 fontSize: 14,
-                marginLeft:10,
-                marginTop:10,
-                textTransform: 'uppercase',
-                fontWeight: 'bold',
                 maxWidth: 110,
               },
               authorText: {
-                color: '#fff',
-                fontSize: 11,
-                marginLeft:10,
-                marginTop:10,
-                paddingBottom: 5,
-                textTransform: 'uppercase',
-                fontWeight: 'normal',
-                width:130,
+                ...itemStyles.authorText
               },
               audioText: {
-                color: '#fff',
-                fontSize: 11,
-                marginLeft:10,
-                marginTop:10,
-                paddingBottom: 5,
-                textTransform: 'uppercase',
-                fontWeight: 'normal',
-              },
+                ...itemStyles.audioText
+              }
             }
   }
 ];
