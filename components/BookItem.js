@@ -2,20 +2,14 @@ import * as WebBrowser from 'expo-web-browser';
 import PropTypes from 'prop-types';
 import React from 'react';
 import {
-  Image,
-  Button,
-  Platform,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
   View,
+  Image,
+  Text,
   ImageBackground,
   TouchableHighlight,
-  Dimensions,
+  ActivityIndicator,
 } from 'react-native';
 import { useStylesheet } from "react-native-responsive-ui";
-import { Ionicons } from '@expo/vector-icons';
 
 
 export default function BookItem({
@@ -30,17 +24,17 @@ export default function BookItem({
   const styles = useStylesheet(staticStyle)
 
     return (
-        <View>
+        <View style={itemStyles.container}>
           <TouchableHighlight
             style={styles.itemContainer}
             onPress={() => WebBrowser.openBrowserAsync(item.post_meta_fields.flip_book_url[0])}
             underlayColor='rgba(250, 168, 127, 1)'>
-            <View style={{display:'flex', flexDirection:'row'}}>
+            <View style={styles.rowContainer}>
               <Image
                 style={styles.rtImage}
                 source={{uri: item.jetpack_featured_media_url}}
                 />
-                <View style={{/*backgroundColor: 'rgba(196, 196, 196, 1)',*/ height:100, width:'100%'}}>
+                <View style={itemStyles.rtLinkTextContainer}>
                 <Text style={styles.rtLinkText}>{item.title.rendered}</Text>
                 </View>
             </View>
@@ -49,37 +43,61 @@ export default function BookItem({
           )
   }
 
+const itemStyles = {
+  container: {
+    flex: 1,
+    backgroundColor: 'rgba(137, 167, 165, 0.8)',
+  },
+  rowContainer: {
+    display:'flex',
+    flexDirection:'row'
+  },
+  itemContainer: {
+      marginBottom:10,
+      backgroundColor: 'rgba(137, 167, 165, 1)',
+      shadowColor: 'rgba(0,0,0, 1)', // IOS
+      shadowOffset: { height: 2, width: 0 }, // IOS
+      shadowOpacity: 1, // IOS
+      shadowRadius: 1, //IOS
+      elevation: 6, // Android
+  },
+  rtLinkTextContainer: {
+    height:100,
+    width:'100%'
+  },
+  rtImage: {
+    width:150,
+  },
+  rtLinkText: {
+    color: '#fff',
+    fontSize: 14,
+    marginLeft:20,
+    textTransform: 'uppercase',
+    fontWeight: 'bold',
+  }
+}
+
 
 const staticStyle = [
   {
             query: { orientation: "landscape" },
             style: {
-              container: {
-                flex: 1,
-                backgroundColor: 'rgba(137, 167, 165, 0.8)',
+              rowContainer: {
+                ...itemStyles.rowContainer,
               },
               itemContainer: {
-                  height:70,
-                  marginBottom:10,
-                  backgroundColor: 'rgba(137, 167, 165, 1)',
-                  shadowColor: 'rgba(0,0,0, 1)', // IOS
-                  shadowOffset: { height: 2, width: 0 }, // IOS
-                  shadowOpacity: 1, // IOS
-                  shadowRadius: 1, //IOS
-                  elevation: 6, // Android
+                ...itemStyles.itemContainer,
+                  height:70
               },
               rtLinkText: {
+                ...itemStyles.rtLinkText,
                 color: '#fff',
-                fontSize: 14,
-                marginLeft:20,
                 marginTop:25,
-                textTransform: 'uppercase',
-                fontWeight: 'bold',
                 width:300,
                 height:80,
               },
               rtImage: {
-                width:150,
+                ...itemStyles.rtImage,
                 height:70
               }
             }
@@ -87,32 +105,21 @@ const staticStyle = [
   {
             query: { orientation: "portrait" },
             style: {
-              container: {
-                flex: 1,
-                backgroundColor: 'rgba(137, 167, 165, 0.8)',
+              rowContainer: {
+                ...itemStyles.rowContainer,
               },
               itemContainer: {
-                  height:100,
-                  marginBottom:10,
-                  backgroundColor: 'rgba(137, 167, 165, 1)',
-                  shadowColor: 'rgba(0,0,0, 1)', // IOS
-                  shadowOffset: { height: 2, width: 0 }, // IOS
-                  shadowOpacity: 1, // IOS
-                  shadowRadius: 1, //IOS
-                  elevation: 6, // Android
+                ...itemStyles.itemContainer,
+                height:100
               },
               rtLinkText: {
-                color: '#fff',
-                fontSize: 14,
-                marginLeft:20,
+                ...itemStyles.rtLinkText,
                 marginTop:30,
-                textTransform: 'uppercase',
-                fontWeight: 'bold',
                 width:130,
                 height:100,
               },
               rtImage: {
-                width:150,
+                ...itemStyles.rtImage,
                 height:100
               }
             }
