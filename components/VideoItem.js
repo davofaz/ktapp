@@ -221,7 +221,6 @@ const staticStyle = [
   {
             query: { orientation: "portrait" },
             style: {
-              ...itemStyles.container,
               itemContainer: {
                 ...itemStyles.itemContainer,
                 height:100,
