@@ -2,15 +2,9 @@ import * as WebBrowser from 'expo-web-browser';
 import PropTypes from 'prop-types';
 import React from 'react';
 import {
-  Image,
-  Button,
-  Platform,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
   View,
-  ImageBackground,
+  Platform,
+  Text,
   TouchableHighlight,
   Linking,
 } from 'react-native';
@@ -20,24 +14,24 @@ import { Ionicons } from '@expo/vector-icons';
 export default function PhoneListItem({
   item,
   name,
-  number,
+  number
 })
 
  {
   const styles = useStylesheet(staticStyle)
 
     return (
-          <View style={styles.itemContainer}>
+          <View style={itemStyles.itemContainer}>
             <TouchableHighlight
-              style={{width:'100%', height:70}}
+              style={itemStyles.itemTouchable}
               onPress={()=>{Linking.openURL(`tel:${item.number}`);}}
               underlayColor='rgba(250, 168, 127, 0.7)'>
               <View style={{flexDirection:'row'}}>
-                <View style={{marginLeft:20, marginTop:3, width:'72%'}}>
-                  <Text style={styles.phoneTitleText}>{item.name}</Text>
-                  <Text style={styles.phoneNumText}>{item.number}</Text>
+                <View style={itemStyles.itemTextContainer}>
+                  <Text style={itemStyles.phoneTitleText}>{item.name}</Text>
+                  <Text style={itemStyles.phoneNumText}>{item.number}</Text>
                 </View>
-                <View style={{marginLeft:20, marginTop:10, width:'28%'}}>
+                <View style={itemStyles.itemIconContainer}>
                   <Ionicons
                     style={styles.callIcon}
                     size={32}
@@ -50,85 +44,70 @@ export default function PhoneListItem({
           )
 }
 
+const itemStyles = {
+  itemContainer: {
+      display:'flex',
+      height:70,
+      marginBottom:10,
+      backgroundColor: 'rgba(137, 167, 165, 1)',
+      shadowColor: 'rgba(0,0,0, 1)', // IOS
+      shadowOffset: { height: 2, width: 0 }, // IOS
+      shadowOpacity: 1, // IOS
+      shadowRadius: 1, //IOS
+      elevation: 6, // Android
+  },
+  itemTouchable: {
+      width:'100%',
+      height:70
+  },
+  itemTextContainer: {
+    marginLeft:20,
+    marginTop:3,
+    width:'72%'
+  },
+  itemIconContainer: {
+    marginLeft:20,
+    marginTop:10,
+    width:'28%'
+  },
+  callIcon: {
+    width: '25%',
+    color:'#fff',
+    marginTop:5
+  },
+  phoneTitleText: {
+    color: '#fff',
+    fontSize: 14,
+    paddingTop: 10,
+    textTransform: 'uppercase',
+    fontWeight: 'bold',
+  },
+  phoneNumText: {
+    color: '#fff',
+    fontSize: 13,
+    textTransform: 'uppercase',
+    fontWeight: 'normal',
+  }
+}
+
 const staticStyle = [
   {
             query: { orientation: "landscape" },
             style: {
-              container: {
-                flex: 1,
-                backgroundColor: 'rgba(137, 167, 165, 0.8)',
-              },
-                itemContainer: {
-                    display:'flex',
-                    height:70,
-                    marginBottom:10,
-                    backgroundColor: 'rgba(137, 167, 165, 1)',
-                    shadowColor: 'rgba(0,0,0, 1)', // IOS
-                    shadowOffset: { height: 2, width: 0 }, // IOS
-                    shadowOpacity: 1, // IOS
-                    shadowRadius: 1, //IOS
-                    elevation: 6, // Android
-                },
                 callIcon: {
-                  width: '25%',
-                  color:'#fff',
-                  marginTop:5,
-                  marginLeft:50,
+                  ...itemStyles.callIcon,
                   alignSelf: 'center',
-                },
-                phoneTitleText: {
-                  color: '#fff',
-                  fontSize: 14,
-                  paddingTop: 10,
-                  textTransform: 'uppercase',
-                  fontWeight: 'bold',
-                },
-                phoneNumText: {
-                  color: '#fff',
-                  fontSize: 13,
-                  textTransform: 'uppercase',
-                  fontWeight: 'normal',
+                  marginLeft:'2%'
                 }
               }
 },
 {
               query: { orientation: "portrait" },
               style: {
-                container: {
-                  flex: 1,
-                  backgroundColor: 'rgba(137, 167, 165, 0.8)',
-                },
-                  itemContainer: {
-                      display:'flex',
-                      height:70,
-                      marginBottom:10,
-                      backgroundColor: 'rgba(137, 167, 165, 1)',
-                      shadowColor: 'rgba(0,0,0, 1)', // IOS
-                      shadowOffset: { height: 2, width: 0 }, // IOS
-                      shadowOpacity: 1, // IOS
-                      shadowRadius: 1, //IOS
-                      elevation: 6, // Android
-                  },
+
                   callIcon: {
-                    //display:'flex',
-                    width: '25%',
-                    color:'#fff',
-                    marginTop:5,
-                    marginLeft:20
-                  },
-                  phoneTitleText: {
-                    color: '#fff',
-                    fontSize: 14,
-                    paddingTop: 10,
-                    textTransform: 'uppercase',
-                    fontWeight: 'bold',
-                  },
-                  phoneNumText: {
-                    color: '#fff',
-                    fontSize: 13,
-                    //paddingTop: 10,
-                    textTransform: 'uppercase',
-                    fontWeight: 'normal',
+                    ...itemStyles.callIcon,
+
                   }
                 }
   }
