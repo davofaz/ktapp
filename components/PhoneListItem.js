@@ -46,7 +46,6 @@ export default function PhoneListItem({
 
 const itemStyles = {
   itemContainer: {
-      display:'flex',
       height:70,
       marginBottom:10,
       backgroundColor: 'rgba(137, 167, 165, 1)',
@@ -54,7 +53,7 @@ const itemStyles = {
       shadowOffset: { height: 2, width: 0 }, // IOS
       shadowOpacity: 1, // IOS
       shadowRadius: 1, //IOS
-      elevation: 6, // Android
+      elevation: 6 // Android
   },
   itemTouchable: {
       width:'100%',
@@ -86,7 +85,7 @@ const itemStyles = {
     color: '#fff',
     fontSize: 13,
     textTransform: 'uppercase',
-    fontWeight: 'normal',
+    fontWeight: 'normal'
   }
 }
 
