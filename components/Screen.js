@@ -4,17 +4,14 @@ import {
   View,
   ImageBackground,
   ScrollView,
-  Platform,
   StyleSheet,
   TouchableHighlight,
-  Text,
 } from 'react-native';
-import * as WebBrowser from 'expo-web-browser';
 import Logo from './Logo';
 
 export default function Screen({
   title,
-  children,
+  children
 }) {
 
   return (
