@@ -26,7 +26,7 @@ export default function CalendarItem({
               style={itemStyles.touchableContainer}
               onPress={() => WebBrowser.openBrowserAsync(item.url)}
               underlayColor='rgba(250, 168, 127, 0.7)'>
-              <View style={{display:'flex', flexDirection:'row'}}>
+              <View style={itemStyles.rowContainer}>
                 <Image
                   style={styles.calendarImage}
                   source={{uri: item.image.url}}
@@ -43,6 +43,10 @@ export default function CalendarItem({
   }
 
   const itemStyles = {
+    rowContainer: {
+      display:'flex',
+      flexDirection:'row'
+    },
     itemContainer: {
         marginBottom:10,
         backgroundColor: 'rgba(137, 167, 165, 1)',
