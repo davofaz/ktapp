@@ -24,12 +24,12 @@ export default function BookItem({
   const styles = useStylesheet(staticStyle)
 
     return (
-        <View style={itemStyles.container}>
+        <View style={styles.itemContainer}>
           <TouchableHighlight
-            style={styles.itemContainer}
+            style={itemStyles.touchableContainer}
             onPress={() => WebBrowser.openBrowserAsync(item.post_meta_fields.flip_book_url[0])}
             underlayColor='rgba(250, 168, 127, 1)'>
-            <View style={styles.rowContainer}>
+            <View style={itemStyles.rowContainer}>
               <Image
                 style={styles.rtImage}
                 source={{uri: item.jetpack_featured_media_url}}
@@ -44,10 +44,6 @@ export default function BookItem({
   }
 
 const itemStyles = {
-  container: {
-    flex: 1,
-    backgroundColor: 'rgba(137, 167, 165, 0.8)',
-  },
   rowContainer: {
     display:'flex',
     flexDirection:'row'
@@ -59,21 +55,25 @@ const itemStyles = {
       shadowOffset: { height: 2, width: 0 }, // IOS
       shadowOpacity: 1, // IOS
       shadowRadius: 1, //IOS
-      elevation: 6, // Android
+      elevation: 6 // Android
+  },
+  touchableContainer: {
+    height:100,
+    marginBottom:10
   },
   rtLinkTextContainer: {
     height:100,
     width:'100%'
   },
   rtImage: {
-    width:150,
+    width:150
   },
   rtLinkText: {
     color: '#fff',
     fontSize: 14,
     marginLeft:20,
     textTransform: 'uppercase',
-    fontWeight: 'bold',
+    fontWeight: 'bold'
   }
 }
 
@@ -82,9 +82,6 @@ const staticStyle = [
   {
             query: { orientation: "landscape" },
             style: {
-              rowContainer: {
-                ...itemStyles.rowContainer,
-              },
               itemContainer: {
                 ...itemStyles.itemContainer,
                   height:70
@@ -105,9 +102,6 @@ const staticStyle = [
   {
             query: { orientation: "portrait" },
             style: {
-              rowContainer: {
-                ...itemStyles.rowContainer,
-              },
               itemContainer: {
                 ...itemStyles.itemContainer,
                 height:100
