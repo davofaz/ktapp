@@ -81,7 +81,6 @@ const screenStyles = {
   flatList: {
     width:'100%'
   }
-
 }
 
 const staticStyle = [

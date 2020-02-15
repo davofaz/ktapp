@@ -16,6 +16,7 @@
     "@expo/vector-icons": "^10.0.6",
     "@react-navigation/web": "^1.0.0-alpha.9",
     "expo": "^36.0.0",
+    "nodejs": "0.0.0",
     "prop-types": "^15.7.2",
     "react": "16.8.3",
     "react-dom": "^16.8.6",
