@@ -69,8 +69,8 @@ const buttonNavStyles = {
     opacity: 80,
     flexDirection: 'row',
     backgroundColor: 'rgba(137, 167, 165, 1)',
-    marginRight: 10,
-    marginLeft: 25,
+    marginRight: 15,
+    marginLeft: 15,
     justifyContent:'center',
     alignContent: 'center',
     shadowColor: 'rgba(0,0,0, .6)', // IOS
@@ -80,6 +80,7 @@ const buttonNavStyles = {
     elevation: 6 // Android
   },
   bottomNav: {
+    //flex:1,
     alignItems: 'center',
     flexDirection:'row',
     marginBottom:20,
@@ -117,7 +118,8 @@ const staticStyle = [
                 },
               bottomNav: {
                 ...buttonNavStyles.bottomNav,
-                marginTop:0
+                marginTop:0,
+                height: 70
                 },
               buttonText: {
                 ...buttonNavStyles.buttonText
@@ -133,27 +135,27 @@ const staticStyle = [
               },
               arrowIcon: {
                 ...buttonNavStyles.arrowIcon,
-                marginTop:10,
                 marginBottom:-10
 
               },
               buttonSquare: {
                 ...buttonNavStyles.buttonSquare,
                 padding: 15,
-                width: 110,
-                height: 110,
+                width: 130,
+                height: 80,
                 marginTop: 35
               },
               bottomNav: {
                 ...buttonNavStyles.bottomNav,
                 width: '80%',
                 alignSelf: 'center',
-                marginTop:-10
+                marginTop:-10,
+                height: 100
               },
               buttonText: {
                 ...buttonNavStyles.buttonText,
-                width: 80,
-                marginTop:15
+                width: 100,
+                marginTop:5
               }
             }
   }

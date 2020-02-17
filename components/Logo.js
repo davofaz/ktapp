@@ -49,7 +49,6 @@ const sharedStyle = {
     color: '#fff',
     fontSize: 12,
     margin: 'auto',
-    paddingTop:20,
     letterSpacing:3,
     textTransform: 'uppercase',
     fontWeight: 'normal'
@@ -77,7 +76,8 @@ const staticStyle = [
                 marginLeft: -10
               },
               pageTitleText: {
-                ...sharedStyle.pageTitleText
+                ...sharedStyle.pageTitleText,
+                paddingTop:20,
               }
             }
   },
@@ -85,19 +85,31 @@ const staticStyle = [
             query: { orientation: "portrait" },
             style: {
               welcomeContainer: {
-                alignItems: 'center',
-                marginTop: 10,
-                marginBottom: 20
+                 alignItems: 'center',
+                // marginTop: 10,
+                // marginBottom: 20
+                flexDirection: 'row',
+                alignItems: 'flex-start',
+                marginTop: -20,
+                marginBottom: 10,
+                marginRight: 20,
+                marginLeft: 20,
+                width: '80%',
+                height: 65
               },
               welcomeImage: {
                 ...sharedStyle.welcomeImage,
-                width: 90,
-                height: 70,
-                marginLeft: 0
+                // width: 90,
+                // height: 70,
+                // marginLeft: 0
+                width: 80,
+                height: 60,
+                //marginLeft: -10
               },
               pageTitleText: {
                 ...sharedStyle.pageTitleText,
-                textAlign: 'center'
+                paddingTop:25
+                //textAlign: 'center'
               }
             }
   }

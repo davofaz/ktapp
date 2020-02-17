@@ -4,8 +4,8 @@ import {
   View,
   FlatList,
   ActivityIndicator,
+  StyleSheet
 } from 'react-native';
-import {useStylesheet} from 'react-native-responsive-ui';
 import { connect } from 'react-redux';
 import { getContacts } from '../actions/contacts';
 import PhoneListItem from '../components/PhoneListItem';
@@ -29,7 +29,6 @@ function ContactNumbersScreen ({
       [loaded],
     );
 
-  const styles = useStylesheet(staticStyle)
   const { kt_general_information,
     senior_ministers_office,
     lcc_satellite_office,
@@ -103,9 +102,9 @@ ContactNumbersScreen.navigationOptions = {
   header: null,
 };
 
-const screenStyles = {
+const styles = StyleSheet.create({
   mainContainer: {
-    flex: 5,
+    flex: 1,
     alignItems: 'center'
   },
   activityContainer: {
@@ -115,39 +114,7 @@ const screenStyles = {
   flatList: {
     width:'100%'
   }
-
-}
-
-const staticStyle = [
-  {
-            query: { orientation: "landscape" },
-            style: {
-              mainContainer: {
-                ...screenStyles.mainContainer,
-              },
-              activityContainer: {
-                ...screenStyles.activityContainer,
-              },
-              flatList: {
-                ...screenStyles.flatList,
-              }
-            }
-  },
-  {
-            query: { orientation: "portrait" },
-            style: {
-              mainContainer: {
-                ...screenStyles.mainContainer,
-              },
-              activityContainer: {
-                ...screenStyles.activityContainer,
-              },
-              flatList: {
-                ...screenStyles.flatList,
-              }
-            }
-  }
-];
+});
 
 export default connect(
   (state, ownProps) => ({

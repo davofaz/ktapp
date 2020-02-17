@@ -16,7 +16,7 @@ export default function Screen({
 
   return (
     <View style={styles.container}>
-      <ImageBackground source={require('../assets/images/background-image.jpg')} style={{width: '100%', height: '100%', resizeMode: 'cover'}}>
+      <ImageBackground source={require('../assets/images/background-image.jpg')} style={styles.backgroundImage}>
         <ScrollView
           style={styles.container}
           contentContainerStyle={styles.contentContainer}>
@@ -45,62 +45,15 @@ const styles = StyleSheet.create({
     flex: 1,
     height: '100%'
   },
-  bottomNav: {
-    width: '80%',
-    alignItems: 'center',
-    alignSelf: 'center',
-    flexDirection:'row',
-    marginBottom:10,
-    },
-  buttonSquare: {
-    padding: 15,
-    width: 110,
-    height: 110,
-    borderRadius: 10,
-    borderWidth:1,
-    borderColor: '#fff',
-    opacity: 80,
-    flexDirection: 'row',
-    backgroundColor: 'rgba(137, 167, 165, 1)',
-    marginTop: 35,
-    marginRight: 10,
-    marginLeft: 25,
-    justifyContent:'center',
-    alignContent: 'center',
-    shadowColor: 'rgba(0,0,0, .6)', // IOS
-    shadowOffset: { height: 1, width: 1 }, // IOS
-    shadowOpacity: 1, // IOS
-    shadowRadius: 1, //IOS
-    elevation: 6, // Android
-    },
-    bottomNav: {
-      width: '80%',
-      alignItems: 'center',
-      alignSelf: 'center',
-      flexDirection:'row',
-      marginBottom:10,
-      },
-    backButton: {
-      flex:1,
-      alignItems: 'center',
-      flexDirection:'column',
-    },
-    buttonText: {
-      color: '#fff',
-      fontSize: 14,
-      width: 80,
-      textAlign: 'center',
-      textTransform: 'uppercase',
-      fontWeight: 'bold',
-    },
-    arrowIcon: {
-      color:'#fff',
-      marginTop:15,
-    },
+  backgroundImage: {
+    flex: 1,
+    width: '100%',
+    height: '100%',
+    resizeMode: 'cover'
+  }
 });
 
 Screen.propTypes = {
   title: PropTypes.string,
-  seeMoreURL: PropTypes.string,
   children: PropTypes.oneOfType([ PropTypes.arrayOf(PropTypes.node), PropTypes.node ]).isRequired
 };
