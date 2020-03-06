@@ -4,9 +4,9 @@ import {
   View,
   Platform,
   Text,
-  TouchableHighlight
+  TouchableHighlight,
+  StyleSheet,
 } from 'react-native';
-import { useStylesheet } from 'react-native-responsive-ui';
 import { Ionicons } from '@expo/vector-icons';
 import * as WebBrowser from 'expo-web-browser';
 import { withNavigation } from 'react-navigation';
@@ -17,7 +17,6 @@ function BottomNav({
 }) {
 
   const { goBack }  = navigation;
-  const styles = useStylesheet(staticStyle)
   return (
     <View style={styles.bottomNav}>
       <TouchableHighlight
@@ -95,69 +94,66 @@ const buttonNavStyles = {
     }
 }
 
-const staticStyle = [
-  {
-            query: { orientation: "landscape" },
-            style: {
-              buttonTextContainer: {
-                ...buttonNavStyles.buttonTextContainer,
-                marginLeft: 25,
-                flexDirection:'row'
-              },
-              arrowIcon: {
-                ...buttonNavStyles.arrowIcon,
-                margin:20,
-                marginLeft:40
-              },
-              buttonSquare: {
-                ...buttonNavStyles.buttonSquare,
-                padding: 0,
-                width: 240,
-                height: 60,
-                marginTop: 20
-                },
-              bottomNav: {
-                ...buttonNavStyles.bottomNav,
-                marginTop:0,
-                height: 70
-                },
-              buttonText: {
-                ...buttonNavStyles.buttonText
-              }
-            }
+const styles = StyleSheet.create({
+  landscape: {
+    style: {
+      buttonTextContainer: {
+        ...buttonNavStyles.buttonTextContainer,
+        marginLeft: 25,
+        flexDirection:'row'
+      },
+      arrowIcon: {
+        ...buttonNavStyles.arrowIcon,
+        margin:20,
+        marginLeft:40
+      },
+      buttonSquare: {
+        ...buttonNavStyles.buttonSquare,
+        padding: 0,
+        width: 240,
+        height: 60,
+        marginTop: 20
+        },
+      bottomNav: {
+        ...buttonNavStyles.bottomNav,
+        marginTop:0,
+        height: 70
+        },
+      buttonText: {
+        ...buttonNavStyles.buttonText
+      }
+    }
   },
-  {
-            query: { orientation: "portrait" },
-            style: {
-              buttonTextContainer: {
-                ...buttonNavStyles.buttonTextContainer,
-                flexDirection:'column'
-              },
-              arrowIcon: {
-                ...buttonNavStyles.arrowIcon,
-                marginBottom:-10
+  portrait: {
+    buttonTextContainer: {
+      ...buttonNavStyles.buttonTextContainer,
+      flexDirection:'column'
+    },
+    arrowIcon: {
+      ...buttonNavStyles.arrowIcon,
+      marginBottom:-10
 
-              },
-              buttonSquare: {
-                ...buttonNavStyles.buttonSquare,
-                padding: 15,
-                width: 130,
-                height: 80,
-                marginTop: 35
-              },
-              bottomNav: {
-                ...buttonNavStyles.bottomNav,
-                width: '80%',
-                alignSelf: 'center',
-                marginTop:-10,
-                height: 100
-              },
-              buttonText: {
-                ...buttonNavStyles.buttonText,
-                width: 100,
-                marginTop:5
-              }
-            }
+    },
+    buttonSquare: {
+      ...buttonNavStyles.buttonSquare,
+      padding: 15,
+      width: 130,
+      height: 80,
+      marginTop: 35
+    },
+    bottomNav: {
+      ...buttonNavStyles.bottomNav,
+      width: '80%',
+      alignSelf: 'center',
+      marginTop:-10,
+      height: 100
+    },
+    buttonText: {
+      ...buttonNavStyles.buttonText,
+      width: 100,
+      marginTop:5
+    }
   }
-];
+});
+
 export default withNavigation(BottomNav);

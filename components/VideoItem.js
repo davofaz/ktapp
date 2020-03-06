@@ -8,8 +8,8 @@ import {
   ImageBackground,
   TouchableHighlight,
   ActivityIndicator,
+  StyleSheet,
 } from 'react-native';
-import { useStylesheet } from "react-native-responsive-ui";
 import { Ionicons } from '@expo/vector-icons';
 
 
@@ -40,8 +40,6 @@ export default function VideoItem({
       []
     );
 
-
-    const styles = useStylesheet(staticStyle)
 
       return (
         (author)
@@ -180,10 +178,8 @@ const itemStyles = {
   },
 }
 
-const staticStyle = [
-  {
-            query: { orientation: "landscape" },
-            style: {
+const staticStyle = StyleSheet.create({
+            landscape: {
               itemContainer: {
                 ...itemStyles.itemContainer,
                 height:80,
@@ -216,11 +212,8 @@ const staticStyle = [
                  ...itemStyles.authorText,
                  marginTop:2,
                }
-            }
   },
-  {
-            query: { orientation: "portrait" },
-            style: {
+  portrait: {
               itemContainer: {
                 ...itemStyles.itemContainer,
                 height:100,
@@ -258,8 +251,7 @@ const staticStyle = [
                 marginTop:3,
               }
             }
-  }
-];
+});
 
 VideoItem.propTypes = {
      item: PropTypes.object.isRequired,

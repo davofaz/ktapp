@@ -7,8 +7,8 @@ import {
   Text,
   TouchableHighlight,
   Linking,
+  StyleSheet,
 } from 'react-native';
-import { useStylesheet } from 'react-native-responsive-ui';
 import { Ionicons } from '@expo/vector-icons';
 
 export default function PhoneListItem({
@@ -89,28 +89,22 @@ const itemStyles = {
   }
 }
 
-const staticStyle = [
-  {
-            query: { orientation: "landscape" },
-            style: {
+const styles = StyleSheet.create({
+  landscape: {
                 callIcon: {
                   ...itemStyles.callIcon,
                   alignSelf: 'center',
                   marginLeft:'2%'
                 }
-              }
 },
-{
-              query: { orientation: "portrait" },
-              style: {
+  portrait: {
 
                   callIcon: {
                     ...itemStyles.callIcon,
 
                   }
                 }
-  }
-];
+});
 
 PhoneListItem.propTypes = {
   item: PropTypes.object.isRequired,

@@ -8,8 +8,8 @@ import {
   ImageBackground,
   TouchableHighlight,
   ActivityIndicator,
+  StyleSheet,
 } from 'react-native';
-import { useStylesheet } from "react-native-responsive-ui";
 
 
 export default function BookItem({
@@ -21,8 +21,6 @@ export default function BookItem({
 })
 
  {
-  const styles = useStylesheet(staticStyle)
-
     return (
         <View style={styles.itemContainer}>
           <TouchableHighlight
@@ -78,47 +76,41 @@ const itemStyles = {
 }
 
 
-const staticStyle = [
-  {
-            query: { orientation: "landscape" },
-            style: {
-              itemContainer: {
-                ...itemStyles.itemContainer,
-                  height:70
-              },
-              rtLinkText: {
-                ...itemStyles.rtLinkText,
-                color: '#fff',
-                marginTop:25,
-                width:300,
-                height:80,
-              },
-              rtImage: {
-                ...itemStyles.rtImage,
-                height:70
-              }
-            }
-  },
-  {
-            query: { orientation: "portrait" },
-            style: {
-              itemContainer: {
-                ...itemStyles.itemContainer,
-                height:100
-              },
-              rtLinkText: {
-                ...itemStyles.rtLinkText,
-                marginTop:30,
-                width:130,
-                height:100,
-              },
-              rtImage: {
-                ...itemStyles.rtImage,
-                height:100
-              }
-            }
+const styles = StyleSheet.create({
+  landscape: {
+    itemContainer: {
+      ...itemStyles.itemContainer,
+        height:70
+    },
+    rtLinkText: {
+      ...itemStyles.rtLinkText,
+      color: '#fff',
+      marginTop:25,
+      width:300,
+      height:80,
+    },
+    rtImage: {
+      ...itemStyles.rtImage,
+      height:70
     }
-  ];
+  },
+  portrait: {
+    itemContainer: {
+      ...itemStyles.itemContainer,
+      height:100
+    },
+    rtLinkText: {
+      ...itemStyles.rtLinkText,
+      marginTop:30,
+      width:130,
+      height:100,
+    },
+    rtImage: {
+      ...itemStyles.rtImage,
+      height:100
+    }
+  }
+});
 
 BookItem.propTypes = {
      item: PropTypes.object.isRequired,
