@@ -7,7 +7,6 @@ import {
   TouchableHighlight,
   View,
 } from 'react-native';
-import {useStylesheet} from 'react-native-responsive-ui';
 import { connect } from 'react-redux';
 import { onNavigationChange } from '../actions/navigation';
 import Screen from '../components/Screen';
@@ -19,7 +18,6 @@ function HomeScreen ({
 })
 
  {
-  const styles = useStylesheet(staticStyle)
   return (
     <Screen
       title="London City Church"
@@ -137,47 +135,42 @@ const sharedStyle = {
 
 }
 
-const staticStyle = [
-  {
-            query: { orientation: "landscape" },
-            style: {
-              buttonSquare: {
-                ...sharedStyle.buttonSquare,
-                padding: 0,
-                width: 140,
-                height: 100,
-                alignItems: 'center'
-                },
-              homeLinksContainer: {
-                ...sharedStyle.homeLinksContainer,
-                width: '70%',
-                margin: 30,
-                },
-              homeLinkText: {
-                ...sharedStyle.homeLinkText,
-                marginTop: 0,
-              }
-            }
+const styles = StyleSheet.create({
+  landscape: {
+    buttonSquare: {
+      ...sharedStyle.buttonSquare,
+      padding: 0,
+      width: 140,
+      height: 100,
+      alignItems: 'center'
+    },
+    homeLinksContainer: {
+      ...sharedStyle.homeLinksContainer,
+      width: '70%',
+      margin: 30,
+    },
+    homeLinkText: {
+      ...sharedStyle.homeLinkText,
+      marginTop: 0,
+    }
   },
-  {
-            query: { orientation: "portrait" },
-            style: {
-              buttonSquare: {
-                ...sharedStyle.buttonSquare,
-                padding: 15,
-                width: 110,
-                height: 110,
-              },
-              homeLinksContainer: {
-                ...sharedStyle.homeLinksContainer,
-                width: '80%',
-                marginTop: 60,
-              },
-              homeLinkText: {
-                ...sharedStyle.homeLinkText,              },
-            }
+  portrait: {
+    buttonSquare: {
+      ...sharedStyle.buttonSquare,
+      padding: 15,
+      width: 110,
+      height: 110,
+    },
+    homeLinksContainer: {
+      ...sharedStyle.homeLinksContainer,
+      width: '80%',
+      marginTop: 60,
+    },
+    homeLinkText: {
+      ...sharedStyle.homeLinkText,
+    },
   }
-];
+});
 
 export default connect(
   (state, ownProps) => ({}),

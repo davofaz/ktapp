@@ -5,9 +5,9 @@ import {
   View,
   Image,
   Text,
-  TouchableHighlight
+  TouchableHighlight,
+  StyleSheet,
 } from 'react-native';
-import {useStylesheet} from 'react-native-responsive-ui';
 import { Ionicons } from '@expo/vector-icons';
 
 export default function CalendarItem({
@@ -82,10 +82,8 @@ export default function CalendarItem({
     },
   }
 
-  const staticStyle = [
-    {
-              query: { orientation: "landscape" },
-              style: {
+const styles = StyleSheet.create({
+  landscape: {
                 itemContainer: {
                   ...itemStyles.itemContainer,
                   height:80
@@ -102,11 +100,8 @@ export default function CalendarItem({
                   ...itemStyles.eventTitleText,
                   fontSize: 16
                 },
-              }
     },
-    {
-              query: { orientation: "portrait" },
-              style: {
+    portrait: {
                 itemContainer: {
                   ...itemStyles.itemContainer,
                   height:100
@@ -126,8 +121,7 @@ export default function CalendarItem({
                   maxWidth:220
                 },
               }
-          }
-];
+          });
 
 CalendarItem.propTypes = {
       item: PropTypes.object.isRequired,

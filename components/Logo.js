@@ -4,9 +4,9 @@ import {
   View,
   TouchableOpacity,
   Image,
-  Text
+  Text,
+  StyleSheet,
 } from 'react-native';
-import { useStylesheet } from 'react-native-responsive-ui';
 import * as WebBrowser from 'expo-web-browser';
 
 export default function Logo({
@@ -14,7 +14,6 @@ export default function Logo({
 })
 
  {
-  const styles = useStylesheet(staticStyle)
   return (
     <View style={styles.welcomeContainer}>
       <TouchableOpacity
@@ -55,10 +54,8 @@ const sharedStyle = {
   }
 }
 
-const staticStyle = [
-  {
-            query: { orientation: "landscape" },
-            style: {
+const styles = StyleSheet.create({
+  landscape: {
               welcomeContainer: {
                 flexDirection: 'row',
                 alignItems: 'flex-start',
@@ -79,11 +76,8 @@ const staticStyle = [
                 ...sharedStyle.pageTitleText,
                 paddingTop:20,
               }
-            }
   },
-  {
-            query: { orientation: "portrait" },
-            style: {
+  portrait: {
               welcomeContainer: {
                  alignItems: 'center',
                 // marginTop: 10,
@@ -111,6 +105,5 @@ const staticStyle = [
                 paddingTop:25
                 //textAlign: 'center'
               }
-            }
   }
-];
+});
