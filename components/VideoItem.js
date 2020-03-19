@@ -4,14 +4,15 @@ import React, {useEffect, useState} from 'react';
 import {
   View,
   Platform,
+  StyleSheet,
   Text,
   ImageBackground,
   TouchableHighlight,
   ActivityIndicator,
 } from 'react-native';
-import { useStylesheet } from "react-native-responsive-ui";
-import { Ionicons } from '@expo/vector-icons';
 
+import { ScreenOrientation } from 'expo';
+import { Ionicons } from '@expo/vector-icons';
 
 export default function VideoItem({
   item,
@@ -23,6 +24,18 @@ export default function VideoItem({
 })
 
  {
+
+   const [orientation, setOrientation] = useState('PORTRAIT_UP');
+
+   ScreenOrientation.addOrientationChangeListener(
+     orientation => setOrientation(orientation.orientationInfo.orientation),
+   );
+   //console.log(orientation)
+   let styles = landscapeStyle;
+
+   if (orientation === 'PORTRAIT_UP' || orientation === 'PORTRAIT_DOWN') {
+     styles = portraitStyle;
+   }
 
   const [author, dataSet] = useState(false);
   const authorId = item.author;
@@ -41,12 +54,10 @@ export default function VideoItem({
     );
 
 
-    const styles = useStylesheet(staticStyle)
-
       return (
         (author)
           ? (
-        <View style={itemStyles.container}>
+        <View style={sharedStyle.container}>
           <View style={styles.itemContainer}>
             <TouchableHighlight
               style={styles.imageTouchable}
@@ -60,7 +71,7 @@ export default function VideoItem({
                   <View style={styles.iconContainer}>
                     <Text>
                       <Ionicons
-                        style={itemStyles.playIcon}
+                        style={sharedStyle.playIcon}
                         size={80}
                         name={Platform.OS === 'ios'
                         ? 'ios-play' : 'md-play'}/>
@@ -74,19 +85,19 @@ export default function VideoItem({
                   style={styles.titleAuthorContainer}
                   onPress={() => WebBrowser.openBrowserAsync(item.post_meta_fields.youtube_url[0])}
                   underlayColor='rgba(250, 168, 127, 0.7)'>
-                  <View style={itemStyles.container}>
+                  <View style={sharedStyle.container}>
                     <Text style={styles.titleText}>{item.title.rendered}</Text>
-                    <Text style={itemStyles.authorText}>{author.name}</Text>
+                    <Text style={sharedStyle.authorText}>{author.name}</Text>
                   </View>
                 </TouchableHighlight>
                 <TouchableHighlight
-                  style={itemStyles.audioContainer}
+                  style={sharedStyle.audioContainer}
                   onPress={() => WebBrowser.openBrowserAsync(item.post_meta_fields.podcast_file[0])}
                   underlayColor='rgba(250, 168, 127, 0.7)'>
-                  <View style={itemStyles.audioTextContainer}>
-                    <Text style={itemStyles.audioText}>MP3</Text>
+                  <View style={sharedStyle.audioTextContainer}>
+                    <Text style={sharedStyle.audioText}>MP3</Text>
                     <Ionicons
-                      style={itemStyles.audioIcon}
+                      style={sharedStyle.audioIcon}
                       size={18}
                       name={Platform.OS === 'ios'
                       ? 'ios-musical-note' : 'md-musical-note'}/>
@@ -96,14 +107,14 @@ export default function VideoItem({
           </View>
         </View>
       ) : (
-          <View style={itemStyles.activityContainer}>
+          <View style={sharedStyle.activityContainer}>
             <ActivityIndicator size="large" color="#ffffff"/>
           </View>
         )
   );
 }
 
-const itemStyles = {
+const sharedStyle = {
   container: {
     flex: 1,
   },
@@ -180,86 +191,79 @@ const itemStyles = {
   },
 }
 
-const staticStyle = [
-  {
-            query: { orientation: "landscape" },
-            style: {
-              itemContainer: {
-                ...itemStyles.itemContainer,
-                height:80,
-              },
-              sermonImage: {
-                width:220,
-                height:80
-              },
-              imageTouchable: {
-                ...itemStyles.imageTouchable,
-                width:220,
-                height:80,
-              },
-              metaContainer: {
-                ...itemStyles.metaContainer,
-              },
-              titleAuthorContainer: {
-                ...itemStyles.titleAuthorContainer,
-              },
-              iconContainer: {
-                ...itemStyles.iconContainer,
-                width:220,
-                height: 80
-              },
-               titleText: {
-                 ...itemStyles.titleText,
-                 fontSize: 18,
-               },
-               authorText: {
-                 ...itemStyles.authorText,
-                 marginTop:2,
-               }
-            }
-  },
-  {
-            query: { orientation: "portrait" },
-            style: {
-              itemContainer: {
-                ...itemStyles.itemContainer,
-                height:100,
-              },
-              sermonImage: {
-                width:175,
-                height:100,
-                marginTop: 0,
-              },
-              imageTouchable: {
-                ...itemStyles.imageTouchable,
-                width:175,
-                height:100,
-              },
-              metaContainer: {
-                ...itemStyles.metaContainer,
-                height:100,
-              },
-              titleAuthorContainer: {
-                ...itemStyles.titleAuthorContainer,
-                width:'100%',
-              },
-              iconContainer: {
-                ...itemStyles.iconContainer,
-                width:175,
-                height: 100
-              },
-              titleText: {
-                ...itemStyles.titleText,
-                fontSize: 14,
-                maxWidth: '100%',
-              },
-              authorText: {
-                ...itemStyles.authorText,
-                marginTop:3,
-              }
-            }
-  }
-];
+const portraitStyle = StyleSheet.create({
+    itemContainer: {
+      ...sharedStyle.itemContainer,
+      height:100,
+    },
+    sermonImage: {
+      width:175,
+      height:100,
+      marginTop: 0,
+    },
+    imageTouchable: {
+      ...sharedStyle.imageTouchable,
+      width:175,
+      height:100,
+    },
+    metaContainer: {
+      ...sharedStyle.metaContainer,
+      height:100,
+    },
+    titleAuthorContainer: {
+      ...sharedStyle.titleAuthorContainer,
+      width:'100%',
+    },
+    iconContainer: {
+      ...sharedStyle.iconContainer,
+      width:175,
+      height: 100
+    },
+    titleText: {
+      ...sharedStyle.titleText,
+      fontSize: 14,
+      maxWidth: '100%',
+    },
+    authorText: {
+      ...sharedStyle.authorText,
+      marginTop:3,
+    }
+});
+
+const landscapeStyle = StyleSheet.create({
+    itemContainer: {
+      ...sharedStyle.itemContainer,
+      height:80,
+    },
+    sermonImage: {
+      width:220,
+      height:80
+    },
+    imageTouchable: {
+      ...sharedStyle.imageTouchable,
+      width:220,
+      height:80,
+    },
+    metaContainer: {
+      ...sharedStyle.metaContainer,
+    },
+    titleAuthorContainer: {
+      ...sharedStyle.titleAuthorContainer,
+    },
+    iconContainer: {
+      ...sharedStyle.iconContainer,
+      width:220,
+      height: 80
+    },
+     titleText: {
+       ...sharedStyle.titleText,
+       fontSize: 18,
+     },
+     authorText: {
+       ...sharedStyle.authorText,
+       marginTop:2,
+     }
+});
 
 VideoItem.propTypes = {
      item: PropTypes.object.isRequired,
