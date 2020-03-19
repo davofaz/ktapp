@@ -7,13 +7,12 @@ import {
   TouchableHighlight,
   View,
 } from 'react-native';
-//import {useStylesheet} from 'react-native-responsive-ui';
+
 import { connect } from 'react-redux';
 import { ScreenOrientation } from 'expo';
 
 import { onNavigationChange } from '../actions/navigation';
 import Screen from '../components/Screen';
-
 
 function HomeScreen ({
   navigation,
@@ -21,12 +20,11 @@ function HomeScreen ({
 })
 {
   const [orientation, setOrientation] = useState('PORTRAIT_UP');
-  //ScreenOrientation.getOrientationAsync().then(data => console.log({data}));
+
   ScreenOrientation.addOrientationChangeListener(
     orientation => setOrientation(orientation.orientationInfo.orientation),
   );
   console.log(orientation)
-  //const styles = useStylesheet(staticStyle)
   let styles = landscapeStyle;
 
   if (orientation === 'PORTRAIT_UP' || orientation === 'PORTRAIT_DOWN') {
@@ -149,48 +147,6 @@ const sharedStyle = {
 
 }
 
-// const staticStyle = [
-//   {
-//             query: { orientation: "landscape" },
-//             style: {
-//               buttonSquare: {
-//                 ...sharedStyle.buttonSquare,
-//                 padding: 0,
-//                 width: 140,
-//                 height: 100,
-//                 alignItems: 'center'
-//                 },
-//               homeLinksContainer: {
-//                 ...sharedStyle.homeLinksContainer,
-//                 width: '70%',
-//                 margin: 30,
-//                 },
-//               homeLinkText: {
-//                 ...sharedStyle.homeLinkText,
-//                 marginTop: 0,
-//               }
-//             }
-//   },
-//   {
-//             query: { orientation: "portrait" },
-//             style: {
-//               buttonSquare: {
-//                 ...sharedStyle.buttonSquare,
-//                 padding: 15,
-//                 width: 110,
-//                 height: 110,
-//               },
-//               homeLinksContainer: {
-//                 ...sharedStyle.homeLinksContainer,
-//                 width: '80%',
-//                 marginTop: 60,
-//               },
-//               homeLinkText: {
-//                 ...sharedStyle.homeLinkText,              },
-//             }
-//   }
-// ];
-
 const portraitStyle = StyleSheet.create({
               buttonSquare: {
                 ...sharedStyle.buttonSquare,
@@ -211,7 +167,6 @@ const portraitStyle = StyleSheet.create({
 const landscapeStyle = StyleSheet.create({
               buttonSquare: {
                 ...sharedStyle.buttonSquare,
-                //paddingTop: 10,
                 width: 140,
                 height: 100,
                 alignItems: 'center',
@@ -221,7 +176,6 @@ const landscapeStyle = StyleSheet.create({
                 ...sharedStyle.homeLinksContainer,
                 width: '65%',
                 margin: 15,
-                //justifyContent: 'space-around'
                 },
               homeLinkText: {
                 ...sharedStyle.homeLinkText,
