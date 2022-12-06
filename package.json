@@ -33,7 +33,7 @@
   "devDependencies": {
     "babel-preset-expo": "^6.0.0",
     "expo-asset": "6.0.0",
-    "expo-cli": "3.11.1",
+    "expo-cli": "6.0.8",
     "expo-constants": "6.0.0",
     "expo-font": "6.0.1",
     "expo-web-browser": "6.0.0",
